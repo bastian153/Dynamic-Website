@@ -7,12 +7,17 @@
 		function overlay(){
 			el = document.getElementById("overlay");
 			el.style.visibility = "visible";
+			var x = document.getElementsByClassName("fade");
+			var i;
+			for (i=0; i < x.length; i++){
+				x[i].style.opacity = 0.5;
+			}
 		}
 	</script>
 </head>
 
 <body>
-	<header>
+	<header class="fade">
 		<h1>Noble &amp Barnes</h1>
 		<nav>
 			<ul>
@@ -21,18 +26,24 @@
 			</ul>
 		</nav>
 	</header>
-
-	<div class="col-12 description">
+	<div class="col-12">
 		<form id="overlay">
-			<input/>
+			First Name:<br>
+			<input type="text" name="firstname"><br>
+			Last Name:<br>
+			<input type="text" name="lastname">
 		</form>
+	</div>
+	<div class="col-12 description fade">
 		<div class="col-5">
 			<img src="../img/endersgame.jpg">
 			<h1>Ender's Game</h1>
 			<p>Author: Orson Scott Card</p>
 			<p>ISBN-10: 0812550706</p>
 			<p>ISBN-13: 978-0812550702</p>
-			
+			<form action="">
+				<input type="button" value="Order" onclick="overlay()"/>
+			</form>
 		</div>
 
 		<div class="col-6 summary">
@@ -62,10 +73,8 @@
 			</p>
 		</div>
 	</div>
-	<form action="">
-		<input type="button" value="Pop" onclick="overlay()"/>
-	</form>
-	<footer>
+
+	<footer class="fade">
 		<h1>FOOTER HERE!</h1>
 	</footer>
 </body>
