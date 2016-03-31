@@ -3,6 +3,12 @@
 <head>
 	<title>Noble &amp Barnes: Ender's Game</title>
 	<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+	<script>
+		function overlay(){
+			el = document.getElementById("overlay");
+			el.style.visibility = "visible";
+		}
+	</script>
 </head>
 
 <body>
@@ -17,13 +23,18 @@
 	</header>
 
 	<div class="col-12 description">
+		<form id="overlay">
+			<input/>
+		</form>
 		<div class="col-5">
 			<img src="../img/endersgame.jpg">
 			<h1>Ender's Game</h1>
 			<p>Author: Orson Scott Card</p>
 			<p>ISBN-10: 0812550706</p>
 			<p>ISBN-13: 978-0812550702</p>
+			
 		</div>
+
 		<div class="col-6 summary">
 			<h1>Description</h1>
 			<p>In order to develop a secure defense against a hostile alien race's next attack, government agencies 
@@ -51,7 +62,9 @@
 			</p>
 		</div>
 	</div>
-
+	<form action="">
+		<input type="button" value="Pop" onclick="overlay()"/>
+	</form>
 	<footer>
 		<h1>FOOTER HERE!</h1>
 	</footer>
