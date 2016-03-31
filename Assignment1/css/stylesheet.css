@@ -110,6 +110,7 @@ table tr td p {
 }
 
 .description div {
+	vertical-align: top;
 	border: 1px solid red;
 	display: inline-block;
 }
@@ -125,7 +126,7 @@ table tr td p {
 }
 
 .description div img:hover{
-	height: 350px;
+	height: 400px;
 }
 
 .description div p {
