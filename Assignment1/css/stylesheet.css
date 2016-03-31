@@ -105,22 +105,62 @@ table tr td p {
 
 
 
+
+
 .description {
 	border: 1px solid red;
 	margin-top: 20px;
-	height: 800px;
+	text-align: center;
+}
+
+.description * {
+	font-family: sans-serif;
 }
 
 .description div {
 	border: 1px solid red;
-	float: left;
+	display: inline-block;
+}
+
+.description div img {
+	height: 300px;
+	margin-top: 20px;
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+}
+
+.description div img:hover{
+	height: 350px;
+}
+
+.description div p {
+	margin-top: 10px;
+}
+
+.summary * {
+	text-align: left;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
+
+.summary p {
+	text-align: left;
 }
 
 
 
 
-footer {
+#about-body{
+	text-align: center;
+}
 
+
+
+footer {
 	text-align: center;
 	margin: 30px;
 	padding: 30px;
