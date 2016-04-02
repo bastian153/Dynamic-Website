@@ -1,23 +1,80 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<title>Order Form</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+</head>
+
 <body>
+	<header>
+		
+	</header>
 
-<p>Click the button to demonstrate the prompt box.</p>
-
-<button onclick="myFunction()">Try it</button>
-
-<p id="demo"></p>
-
-<script>
-function myFunction() {
-    var person = prompt("Please enter your name", "Harry Potter");
-    
-    if (person != null) {
-        document.getElementById("demo").innerHTML =
-        "Hello " + person + "! How are you today?";
-    }
-}
-</script>
+	<div class="order_form">
+		<div class="step">
+			<div class="number">
+				<span>1</span>
+			</div>
+			<div class="title">
+				<h1>Book Information</h1>
+			</div>
+		</div>
+		<div class="content">
+			<form>
+				<div>
+					<i class="fa fa-book fa-lg"></i>	
+					<input type="number" placeholder="ISBN"></input>
+				</div>
+				<div>
+					<i class="fa fa-plus-square fa-lg"></i>
+					<input type="number" placeholder="Quantity"></input>
+				</div>
+				
+			</form>
+		</div>
+		<div class="step">
+			<div class="number">
+				<span>2</span>
+			</div>
+			<div class="title">
+				<h1>Billing Information</h1>
+			</div>
+		</div>
+		<div class="content">
+			<form>
+				<div>
+					<i class="fa fa-user fa-lg"></i>	
+					<input type="text" placeholder="First Name"></input>
+				</div>
+				<div>	
+					<input style="margin-left:39px" type="text" placeholder="Last Name"></input>
+				</div>
+				<div>
+					<i class="fa fa-location-arrow fa-lg"></i>
+					<input type="text" placeholder="Address"></input>
+				</div>
+				<div>	
+					<input style="margin-left:39px" type="text" placeholder="City"></input>
+				</div>
+				<div>	
+					<input style="margin-left:39px" type="text" placeholder="State"></input>
+				</div>
+				<div>	
+					<input style="margin-left:39px" type="text" placeholder="Postal Code"></input>
+				</div>
+			</form>
+		</div>
+		<div class="step">
+			<div class="number">
+				<span>3</span>
+			</div>
+			<div class="title">
+				<h1>Shipping Information</h1>
+			</div>
+		</div>
+	</div>
 
 </body>
+
 </html>
