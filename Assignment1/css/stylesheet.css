@@ -100,18 +100,21 @@ table tr td p {
 }
 
 .description {
-	border: 1px solid red;
-	margin-top: 20px;
+	padding: 20px;
 	text-align: center;
+	border-bottom: 2px solid gray;
 }
 
 .description * {
 	font-family: sans-serif;
 }
 
+.description p {
+	line-height: 20px
+}
+
 .description div {
 	vertical-align: top;
-	border: 1px solid red;
 	display: inline-block;
 }
 
@@ -142,6 +145,21 @@ table tr td p {
 
 .summary p {
 	text-align: left;
+}
+
+
+#author {
+	padding: 20px;
+}
+
+#author * {
+	font-family: sans-serif;
+	line-height: 20px;
+	margin: 20px;
+}
+
+#author h1 {
+	text-align: center;
 }
 
 #about-body{
@@ -226,10 +244,3 @@ form div input{
 	border: 1px solid #ccc;
 	font-size: 18px;
 }
-
-
-
-
-
-
-
