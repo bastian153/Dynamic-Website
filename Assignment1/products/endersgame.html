@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<header class="fade">
+	<header class="col-12 fade">
 		<h1>Noble &amp Barnes</h1>
 		<nav>
 			<ul>
@@ -41,6 +41,7 @@
 			<p>Author: Orson Scott Card</p>
 			<p>ISBN-10: 0812550706</p>
 			<p>ISBN-13: 978-0812550702</p>
+			<p>Price: $5.99</p>
 			<form action="">
 				<input type="button" value="Order" onclick="overlay()"/>
 			</form>
@@ -75,13 +76,28 @@
 	</div>
 	
 	<div id="author" class="col-12">
-		<h2>About the Author</h2>
+		<h1>About the Author</h1>
 		<p>
 		Orson Scott Card is the bestselling author best known for the classic Ender's Game, Ender's Shadow and other novels in the Ender universe. Most recently, he was awarded the 2008 Margaret A. Edwards Award for lifetime achievement in Young Adult literature, from the American Library Association. Card has written sixty-one books, assorted plays, comics, and essays and newspaper columns. His work has won multiple awards, including back-to-back wins of the Hugo and the Nebula Awards-the only author to have done so in consecutive years. His titles have also landed on 'best of' lists and been adopted by cities, universities and libraries for reading programs. The Ender novels have inspired a Marvel Comics series, a forthcoming video game from Chair Entertainment, and pre-production on a film version. A highly anticipated The Authorized Ender Companion, written by Jake Black, is also forthcoming.Card offers writing workshops from time to time and occasionally teaches writing and literature at universities.Orson Scott Card currently lives with his family in Greensboro, NC.	
 		</p>
 	</div>
 
-	<footer>
+	<!-- Trying some form stuff here -->
+	<form>
+		<fieldset>
+			<legend>Order Form</legend>
+			<h3>Shipping Infomation</h3>
+			<p>First Name: <input type="text" name="firstname" 
+				required></input></p>
+			<p>Last Name: <input type="text" name="lastname" 
+				required></input></p>
+			<p>Email: <input type="email" required></input></p>
+			<h3>Product Information</h3>
+			<input type="submit" value="Order"></input>
+		</fieldset>
+	</form>
+
+	<footer class="col-12">
 		<h1>FOOTER HERE!</h1>
 	</footer>
 </body>
