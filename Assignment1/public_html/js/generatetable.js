@@ -36,11 +36,11 @@ function createTable(bookArray){
 
 function createRows(bookArray){
 	var html = "";
-	var rows = Math.floor(bookArray.length / 3);
+	var rows = Math.ceil(bookArray.length / 3);
 	var index = 0;
 	for(var i = 0; i < rows; i++){
 		html += "<tr>\n";
-		for(var j = 0; j < 3 && index < bookArray.length; j++){
+		for(var j = 0; index < bookArray.length && j < 3; j++){
 			var book = bookArray[index];
 			html += "<td class=\"col-4\">\n";
 			html += "<a href=\"products/" + book.file + ".html\">\n";
