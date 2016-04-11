@@ -12,6 +12,8 @@
 	</header>
 
 	<div class="order_form">
+
+		<!-- Book Info -->
 		<div class="step">
 			<div class="number">
 				<span>1</span>
@@ -22,17 +24,19 @@
 		</div>
 		<div class="content">
 			<form>
-				<div>
+				<div class="input-info">
 					<i class="fa fa-book fa-lg"></i>	
-					<input type="number" placeholder="ISBN"></input>
+					<input class="all-input" type="number" placeholder="ISBN"></input>
 				</div>
-				<div>
+				<div class="input-info">
 					<i class="fa fa-plus-square fa-lg"></i>
-					<input type="number" placeholder="Quantity"></input>
+					<input class="all-input" type="number" placeholder="Quantity"></input>
 				</div>
 				
 			</form>
 		</div>
+
+		<!-- Billing -->
 		<div class="step">
 			<div class="number">
 				<span>2</span>
@@ -43,34 +47,108 @@
 		</div>
 		<div class="content">
 			<form>
-				<div>
+				<div class="input-info">
 					<i class="fa fa-user fa-lg"></i>	
-					<input type="text" placeholder="First Name"></input>
+					<input class="all-input" type="text" placeholder="First Name"></input>
 				</div>
-				<div>	
-					<input style="margin-left:39px" type="text" placeholder="Last Name"></input>
+				<div class="input-info">	
+					<input class="all-input" style="margin-left:39px" type="text" placeholder="Last Name"></input>
 				</div>
-				<div>
+				<div class="input-info">
 					<i class="fa fa-location-arrow fa-lg"></i>
-					<input type="text" placeholder="Address"></input>
+					<input class="all-input" type="text" placeholder="Address"></input>
 				</div>
-				<div>	
-					<input style="margin-left:39px" type="text" placeholder="City"></input>
+				<div class="input-info">	
+					<input class="all-input" style="margin-left:39px" type="text" placeholder="City"></input>
 				</div>
-				<div>	
-					<input style="margin-left:39px" type="text" placeholder="State"></input>
+				<div class="input-info">	
+					<input class="all-input" style="margin-left:39px" type="text" placeholder="State"></input>
 				</div>
-				<div>	
-					<input style="margin-left:39px" type="text" placeholder="Postal Code"></input>
+				<div class="input-info">	
+					<input class="all-input" style="margin-left:39px" type="text" placeholder="Postal Code"></input>
+				</div>
+				<div class="input-info">	
+					<input class="all-input" style="margin-left:39px" type="text" placeholder="Country"></input>
 				</div>
 			</form>
 		</div>
+
+		<!-- Shipping -->
 		<div class="step">
 			<div class="number">
 				<span>3</span>
 			</div>
 			<div class="title">
 				<h1>Shipping Information</h1>
+			</div>
+		</div>
+		<div class="content">
+			<form>
+				<div class="shipping">
+					<input class="radio" type="radio" id="shipping_1" value="1"/>
+					<label for="shipping_1"> Standard Shipping <span class="price">$4.00</span></label>
+        		</div>
+				<div class="shipping">		
+					<input class="radio" type="radio" id="shipping_2" value="2"/>
+					<label for="shipping_2"> Express Shipping <span class="price">$8.00</span></label>
+				</div>
+				<div class="shipping">		
+					<input class="radio" type="radio" id="shipping_3" value="3"/>
+					<label for="shipping_3"> Overnight Shipping <span class="price">$12.00</span></label>
+				</div>
+			</form>
+		</div>
+
+		<!-- Credit Card -->
+		<div class="step">
+			<div class="number">
+				<span>4</span>
+			</div>
+			<div class="title">
+				<h1>Credit Card Information</h1>
+			</div>
+		</div>
+		<div class="content">
+			<form>
+				<div class="input-info">	
+					<input class="all-input" style="margin-left:39px" type="text" placeholder="XXXX-XXXX-XXXX-XXXX"></input>
+				</div>
+				<div class="input-info" style="margin-left:39px;margin-top:5px">
+					<select class="month">
+						<option value="Jan">Jan</option>
+						<option value="Jan">Feb</option>
+						<option value="Jan">Mar</option>
+						<option value="Jan">April</option>
+						<option value="Jan">May</option>
+						<option value="Jan">June</option>
+						<option value="Jan">July</option>
+						<option value="Jan">August</option>
+						<option value="Jan">Sep</option>
+						<option value="Jan">Oct</option>
+						<option value="Jan">Nov</option>
+						<option value="Jan">Dec</option>
+					</select>
+					<span class="dividor">-</span>
+					<select class="year">
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+						<option value="2020">2020</option>
+					</select>
+				</div>
+				<div class="input-info" style="margin-top:5px">	
+					<input class="all-input" style="margin-left:39px" type="text" placeholder="CSV"></input>
+				</div>
+			</form>
+		</div>
+		
+		<div class="step">
+			<div class="number">
+				<span>5</span>
+			</div>
+			<div class="title">
+				<h1>Summary</h1>
 			</div>
 		</div>
 	</div>

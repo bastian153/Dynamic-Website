@@ -224,7 +224,7 @@ footer {
     margin: 30px;
 }
 
-.content form div{
+.input-info{
     width: 100%;
     max-width: 400px;
     margin-left: 0; 
@@ -236,11 +236,48 @@ form div i{
     margin-right: 10px;
 }
 
-form div input{
+.all-input{
     padding: 10px 15px;
     width: 80%;
     height: 25px;
     border-radius: 3px;
     border: 1px solid #ccc;
     font-size: 18px;
+}
+
+.shipping{
+    width: 100%;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.shipping input{
+    width: 10px;
+}
+
+.shipping label{
+    margin-left: 10px;
+    color: #888;
+}
+
+.radio{
+    margin-left: 5px;
+}
+
+.month{
+    width: 40%;
+    height: 47px;
+}
+
+.year{
+    width: 40%;
+    height: 47px;
+    float: right;
+    margin-right: 47px;
+}
+
+.dividor{
+    margin: 10px;
+    font-size: 20px;
+    text-align: center;
 }
