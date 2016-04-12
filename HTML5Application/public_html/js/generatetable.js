@@ -1,5 +1,4 @@
 function main() {
-	console.log("Hello World!");
 	var bookArray = createBookArray();
 	createTable(bookArray);
 }
@@ -15,7 +14,7 @@ function createBookArray(){
 	bookArray.push(new Book("Fahrenheit 451", "Ray Bradbury", "1451673310", "9.52", "fahrenheit451"));
 	bookArray.push(new Book("Of Mice and Men", "John Steinbeck", "0140177396", "7.00", "ofmiceandmen"));
 	bookArray.push(new Book("To Kill A Mockingbird", "Harper Lee", "0446310786", "5.89", "tokillamockingbird"));
-	bookArray.push(new Book("Like Water for Chocolate", "Laura Esquirel", "038542017X", "8.92", "likewaterforchocolate"));
+	bookArray.push(new Book("Like Water for Chocolate", "Laura Esquirel", "0385420174", "8.92", "likewaterforchocolate"));
 	bookArray.push(new Book("The Giver", "Lois Lowry", "0544336267", "4.39", "thegiver"));
 	bookArray.push(new Book("Lost in Shangri-La", "Mitchell Zuckoff", "0061988359", "10.66", "lostinshangrila"));
 	bookArray.push(new Book("Harry Potter and the Cursed Child, Parts I & II", "JK Rowling", 
@@ -30,7 +29,6 @@ function createTable(bookArray){
 	html += createRows(bookArray);
 	html += "</table>\n";
 	document.getElementById("products").innerHTML = html;
-	console.log(html);
 }
 
 
