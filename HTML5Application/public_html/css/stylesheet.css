@@ -264,20 +264,47 @@ form div i{
     margin-left: 5px;
 }
 
-.month{
+#month{
     width: 40%;
     height: 47px;
+    font-size: 18px;
+    -webkit-appearance: menulist-button;
 }
 
-.year{
+#year{
     width: 40%;
     height: 47px;
     float: right;
     margin-right: 47px;
+    font-size: 18px;
+    -webkit-appearance: menulist-button;
 }
 
 .dividor{
     margin: 10px;
     font-size: 20px;
     text-align: center;
+}
+
+.input-select{
+    height: 47px;
+    width: 100%;
+    max-width: 352px;
+    font-size: 18px;
+    -webkit-appearance: menulist-button;
+}
+
+#left{
+    width:40%;
+    margin: 0;
+    display: inline-block;
+}
+
+#right{
+    width: 50%;
+    display: inline-block;
+}
+
+#right input{
+    margin-right: 10px;
 }

@@ -4,9 +4,12 @@
 	<title>Order Form</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+
+	<!-- Create States and Month options for select -->
+	<script type="text/javascript" src="js/my_script.js"></script>
 </head>
 
-<body>
+<body onload='main()'>
 	<header>
 		
 	</header>
@@ -26,11 +29,11 @@
 			<form>
 				<div class="input-info">
 					<i class="fa fa-book fa-lg"></i>	
-					<input class="all-input" type="number" placeholder="ISBN"></input>
+					<input class="all-input" type="number" placeholder="ISBN" min="1000000000" max="1000000000000"></input>
 				</div>
 				<div class="input-info">
 					<i class="fa fa-plus-square fa-lg"></i>
-					<input class="all-input" type="number" placeholder="Quantity"></input>
+					<input class="all-input" type="number" placeholder="Quantity" min="1"></input>
 				</div>
 				
 			</form>
@@ -58,17 +61,17 @@
 					<i class="fa fa-location-arrow fa-lg"></i>
 					<input class="all-input" type="text" placeholder="Address"></input>
 				</div>
+
 				<div class="input-info">	
 					<input class="all-input" style="margin-left:39px" type="text" placeholder="City"></input>
 				</div>
 				<div class="input-info">	
-					<input class="all-input" style="margin-left:39px" type="text" placeholder="State"></input>
+					<select class="input-select" id="selectElementId" style="margin-left:39px">
+						<option selected disabled>State</option>
+					</select>
 				</div>
 				<div class="input-info">	
 					<input class="all-input" style="margin-left:39px" type="text" placeholder="Postal Code"></input>
-				</div>
-				<div class="input-info">	
-					<input class="all-input" style="margin-left:39px" type="text" placeholder="Country"></input>
 				</div>
 			</form>
 		</div>
@@ -85,15 +88,15 @@
 		<div class="content">
 			<form>
 				<div class="shipping">
-					<input class="radio" type="radio" id="shipping_1" value="1"/>
+					<input class="radio" type="radio" id="shipping_1" value="1" name="rad_shipping"/>
 					<label for="shipping_1"> Standard Shipping <span class="price">$4.00</span></label>
         		</div>
 				<div class="shipping">		
-					<input class="radio" type="radio" id="shipping_2" value="2"/>
+					<input class="radio" type="radio" id="shipping_2" value="2" name="rad_shipping"/>
 					<label for="shipping_2"> Express Shipping <span class="price">$8.00</span></label>
 				</div>
 				<div class="shipping">		
-					<input class="radio" type="radio" id="shipping_3" value="3"/>
+					<input class="radio" type="radio" id="shipping_3" value="3" name="rad_shipping"/>
 					<label for="shipping_3"> Overnight Shipping <span class="price">$12.00</span></label>
 				</div>
 			</form>
@@ -109,38 +112,36 @@
 			</div>
 		</div>
 		<div class="content">
-			<form>
-				<div class="input-info">	
-					<input class="all-input" style="margin-left:39px" type="text" placeholder="XXXX-XXXX-XXXX-XXXX"></input>
-				</div>
-				<div class="input-info" style="margin-left:39px;margin-top:5px">
-					<select class="month">
-						<option value="Jan">Jan</option>
-						<option value="Jan">Feb</option>
-						<option value="Jan">Mar</option>
-						<option value="Jan">April</option>
-						<option value="Jan">May</option>
-						<option value="Jan">June</option>
-						<option value="Jan">July</option>
-						<option value="Jan">August</option>
-						<option value="Jan">Sep</option>
-						<option value="Jan">Oct</option>
-						<option value="Jan">Nov</option>
-						<option value="Jan">Dec</option>
-					</select>
-					<span class="dividor">-</span>
-					<select class="year">
-						<option value="2016">2016</option>
-						<option value="2017">2017</option>
-						<option value="2018">2018</option>
-						<option value="2019">2019</option>
-						<option value="2020">2020</option>
-					</select>
-				</div>
-				<div class="input-info" style="margin-top:5px">	
-					<input class="all-input" style="margin-left:39px" type="text" placeholder="CSV"></input>
-				</div>
-			</form>
+			<div id="left">
+				<form>
+					<div class="input-info">	
+						<input class="all-input" style="margin-left:39px" type="text" placeholder="XXXX-XXXX-XXXX-XXXX"></input>
+					</div>
+					<div class="input-info" style="margin-left:39px;margin-top:5px;height:47px">
+						<select id="month">
+							<option selected disabled>Month</option>
+						</select>
+						<span class="dividor">-</span>
+						<select id="year">
+							<option selected disabled>Year</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+							<option value="2020">2020</option>
+						</select>
+					</div>
+					<div class="input-info" style="margin-top:5px">	
+						<input class="all-input" style="margin-left:39px" type="text" placeholder="CSV"></input>
+					</div>
+				</form>
+			</div>
+			<div id="right">
+				<input type="image" src="img/amex.png">
+				<input type="image" src="img/master.png">
+				<input type="image" src="img/visa.png">
+				<input type="image" src="img/discover.png">
+			</div>	
 		</div>
 		
 		<div class="step">
@@ -152,6 +153,10 @@
 			</div>
 		</div>
 	</div>
+	
+	<footer>
+		
+	</footer>
 
 </body>
 
