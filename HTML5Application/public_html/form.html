@@ -7,6 +7,10 @@
 
 	<!-- Create States and Month options for select -->
 	<script type="text/javascript" src="js/my_script.js"></script>
+
+	<!-- Check each field of the form -->
+	<script type="text/javascript" src="js/formchecker.js"></script>
+
 </head>
 
 <body onload='main()'>
@@ -26,14 +30,14 @@
 			</div>
 		</div>
 		<div class="content">
-			<form>
+			<form name="Book-Info">
 				<div class="input-info">
 					<i class="fa fa-book fa-lg"></i>	
-					<input class="all-input" type="number" placeholder="ISBN" min="1000000000" max="1000000000000"></input>
+					<input name="ISBN" class="all-input" type="number" placeholder="ISBN" min="1000000000" max="1000000000000"></input>
 				</div>
 				<div class="input-info">
 					<i class="fa fa-plus-square fa-lg"></i>
-					<input class="all-input" type="number" placeholder="Quantity" min="1"></input>
+					<input name="Quantity" class="all-input" type="number" placeholder="Quantity" min="1"></input>
 				</div>
 				
 			</form>
@@ -49,29 +53,29 @@
 			</div>
 		</div>
 		<div class="content">
-			<form>
+			<form name="Billing-Info">
 				<div class="input-info">
 					<i class="fa fa-user fa-lg"></i>	
-					<input class="all-input" type="text" placeholder="First Name"></input>
+					<input name="firstName" class="all-input" type="text" placeholder="First Name"></input>
 				</div>
 				<div class="input-info">	
-					<input class="all-input" style="margin-left:39px" type="text" placeholder="Last Name"></input>
+					<input name="lastName" class="all-input" style="margin-left:39px" type="text" placeholder="Last Name"></input>
 				</div>
 				<div class="input-info">
 					<i class="fa fa-location-arrow fa-lg"></i>
-					<input class="all-input" type="text" placeholder="Address"></input>
+					<input name="address" class="all-input" type="text" placeholder="Address"></input>
 				</div>
 
 				<div class="input-info">	
-					<input class="all-input" style="margin-left:39px" type="text" placeholder="City"></input>
+					<input name="city" class="all-input" style="margin-left:39px" type="text" placeholder="City"></input>
 				</div>
 				<div class="input-info">	
-					<select class="input-select" id="selectElementId" style="margin-left:39px">
-						<option selected disabled>State</option>
+					<select name="state" class="input-select" id="selectElementId" style="margin-left:39px">
+						<option selected value="">State</option>
 					</select>
 				</div>
 				<div class="input-info">	
-					<input class="all-input" style="margin-left:39px" type="text" placeholder="Postal Code"></input>
+					<input name="areaCode" class="all-input" style="margin-left:39px" type="text" placeholder="Postal Code"></input>
 				</div>
 			</form>
 		</div>
@@ -86,7 +90,7 @@
 			</div>
 		</div>
 		<div class="content">
-			<form>
+			<form name="Shipping-Info">
 				<div class="shipping">
 					<input class="radio" type="radio" id="shipping_1" value="1" name="rad_shipping"/>
 					<label for="shipping_1"> Standard Shipping <span class="price">$4.00</span></label>
@@ -113,17 +117,17 @@
 		</div>
 		<div class="content">
 			<div id="left">
-				<form>
+				<form name="Creditcard-Info">
 					<div class="input-info">	
-						<input class="all-input" style="margin-left:39px" type="text" placeholder="XXXX-XXXX-XXXX-XXXX"></input>
+						<input name="card" class="all-input" style="margin-left:39px" type="text" placeholder="XXXX-XXXX-XXXX-XXXX"></input>
 					</div>
 					<div class="input-info" style="margin-left:39px;margin-top:5px;height:47px">
-						<select id="month">
-							<option selected disabled>Month</option>
+						<select name="month" id="month">
+							<option selected value="">Month</option>
 						</select>
 						<span class="dividor">-</span>
-						<select id="year">
-							<option selected disabled>Year</option>
+						<select name="year" id="year">
+							<option selected value="">Year</option>
 							<option value="2016">2016</option>
 							<option value="2017">2017</option>
 							<option value="2018">2018</option>
@@ -132,7 +136,7 @@
 						</select>
 					</div>
 					<div class="input-info" style="margin-top:5px">	
-						<input class="all-input" style="margin-left:39px" type="text" placeholder="CSV"></input>
+						<input name="csv" class="all-input" style="margin-left:39px" type="text" placeholder="CSV"></input>
 					</div>
 				</form>
 			</div>
@@ -144,14 +148,11 @@
 			</div>	
 		</div>
 		
-		<div class="step">
-			<div class="number">
-				<span>5</span>
-			</div>
-			<div class="title">
-				<h1>Summary</h1>
-			</div>
-		</div>
+		<!-- Divider -->
+		<hr>
+		
+		<!-- Validate all input fields before submitting -->
+		<input type="submit" class="submission" value="Submit" onClick="checkValidation()">
 	</div>
 	
 	<footer>

@@ -308,3 +308,15 @@ form div i{
 #right input{
     margin-right: 10px;
 }
+
+.submission{
+    margin: 20px 40px;
+    height: 63px;
+    width: 100px;
+    border-radius: 5px;
+    background-color: #80c0ff;
+    color:#FFF;
+    font-size: 20px;
+}
+
+.submission:focus {outline:0;}
