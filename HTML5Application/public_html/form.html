@@ -34,10 +34,12 @@
 				<div class="input-info">
 					<i class="fa fa-book fa-lg"></i>	
 					<input name="ISBN" class="all-input" type="number" placeholder="ISBN" min="1000000000" max="1000000000000"></input>
+					<p id="isbn-error">Incorrect Format: (10 Digits or 13 Digits)</p>
 				</div>
 				<div class="input-info">
 					<i class="fa fa-plus-square fa-lg"></i>
 					<input name="Quantity" class="all-input" type="number" placeholder="Quantity" min="1"></input>
+					<p id="quantity-error">Must be greater than or equal to 1</p>
 				</div>
 				
 			</form>
@@ -57,25 +59,31 @@
 				<div class="input-info">
 					<i class="fa fa-user fa-lg"></i>	
 					<input name="firstName" class="all-input" type="text" placeholder="First Name"></input>
+					<p id="first-name-error">Field is missing</p>
 				</div>
 				<div class="input-info">	
 					<input name="lastName" class="all-input" style="margin-left:39px" type="text" placeholder="Last Name"></input>
+					<p id="last-name-error">Field is missing</p>
 				</div>
 				<div class="input-info">
 					<i class="fa fa-location-arrow fa-lg"></i>
 					<input name="address" class="all-input" type="text" placeholder="Address"></input>
+					<p id="address-error">Incorrect Format: street number and street name</p>
 				</div>
 
 				<div class="input-info">	
 					<input name="city" class="all-input" style="margin-left:39px" type="text" placeholder="City"></input>
+					<p id="city-error">Field is missing</p>
 				</div>
 				<div class="input-info">	
 					<select name="state" class="input-select" id="selectElementId" style="margin-left:39px">
 						<option selected value="">State</option>
 					</select>
+					<p id="state-error">State was not selected</p>
 				</div>
 				<div class="input-info">	
 					<input name="areaCode" class="all-input" style="margin-left:39px" type="text" placeholder="Postal Code"></input>
+					<p id="zip-code-error">Incorrect format: five digits, +4 Zip Code Optional</p>
 				</div>
 			</form>
 		</div>
@@ -92,7 +100,7 @@
 		<div class="content">
 			<form name="Shipping-Info">
 				<div class="shipping">
-					<input class="radio" type="radio" id="shipping_1" value="1" name="rad_shipping"/>
+					<input class="radio" type="radio" id="shipping_1" value="1" name="rad_shipping" checked/>
 					<label for="shipping_1"> Standard Shipping <span class="price">$4.00</span></label>
         		</div>
 				<div class="shipping">		
@@ -120,6 +128,7 @@
 				<form name="Creditcard-Info">
 					<div class="input-info">	
 						<input name="card" class="all-input" style="margin-left:39px" type="text" placeholder="XXXX-XXXX-XXXX-XXXX"></input>
+						<p id="credit-card-error">Incorrect Format: 16 digits</p>
 					</div>
 					<div class="input-info" style="margin-left:39px;margin-top:5px;height:47px">
 						<select name="month" id="month">
@@ -137,6 +146,7 @@
 					</div>
 					<div class="input-info" style="margin-top:5px">	
 						<input name="csv" class="all-input" style="margin-left:39px" type="text" placeholder="CSV"></input>
+						<p id="csv-error">Incorrect Format: 3 digits</p>
 					</div>
 				</form>
 			</div>

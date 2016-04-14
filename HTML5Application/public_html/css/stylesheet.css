@@ -226,7 +226,7 @@ footer {
 
 .input-info{
     width: 100%;
-    max-width: 400px;
+    /*max-width: 400px;*/
     margin-left: 0; 
 }
 
@@ -238,11 +238,21 @@ form div i{
 
 .all-input{
     padding: 10px 15px;
-    width: 80%;
+    width: 35%;
     height: 25px;
     border-radius: 3px;
     border: 1px solid #ccc;
     font-size: 18px;
+    display: inline-block;
+}
+
+.input-info > p {
+    font-family: sans-serif;
+    color: red;
+    width: 40%;
+    display: inline-block;
+    margin-left: 19px;
+    visibility: hidden;
 }
 
 .shipping{

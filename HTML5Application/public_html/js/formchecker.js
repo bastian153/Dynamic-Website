@@ -18,11 +18,21 @@ function checkBookInformation(){
     var check = 0;
     if(isbn_input == null || isbn_input == ""){
         document.forms["Book-Info"]["ISBN"].style.borderColor="#FD8182";
+        document.getElementById("isbn-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Book-Info"]["ISBN"].style.border = "1px solid #ccc";
+        document.getElementById("isbn-error").style.visibility = "hidden";
     }
-    if(quan_input == null || quan_input == ""){
+
+
+    if(quan_input == null || quan_input == "" || (isNaN(quan_input) && parseInt(quan_input) < 1)){
         document.forms["Book-Info"]["Quantity"].style.borderColor="#FD8182";
+        document.getElementById("quantity-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Book-Info"]["Quantity"].style.border = "1px solid #ccc";
+        document.getElementById("quantity-error").style.visibility = "hidden";
     }
     return check;
 }
@@ -54,27 +64,59 @@ function checkBillingInformation(){
     var check = 0;
     if(!firstReg){
         document.forms["Billing-Info"]["firstName"].style.borderColor="#FD8182";
+        document.getElementById("first-name-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Billing-Info"]["firstName"].style.border = "1px solid #ccc";
+        document.getElementById("first-name-error").style.visibility = "hidden";
     }
+
+
     if(!lastReg){
         document.forms["Billing-Info"]["lastName"].style.borderColor="#FD8182";
+        document.getElementById("last-name-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Billing-Info"]["lastName"].style.border = "1px solid #ccc";
+        document.getElementById("last-name-error").style.visibility = "hidden";
     }
+
+
     if(!addrReg){
         document.forms["Billing-Info"]["address"].style.borderColor="#FD8182";
+        document.getElementById("address-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Billing-Info"]["address"].style.border = "1px solid #ccc";
+        document.getElementById("address-error").style.visibility = "hidden";
     }
+
     if(!cityReg){
         document.forms["Billing-Info"]["city"].style.borderColor="#FD8182";
+        document.getElementById("city-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Billing-Info"]["city"].style.border = "1px solid #ccc";
+        document.getElementById("city-error").style.visibility = "hidden";
     }
+
     if(state[state.selectedIndex].value === ""){
         document.forms["Billing-Info"]["state"].style.borderColor="#FD8182";
+        document.getElementById("state-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Billing-Info"]["state"].style.border = "1px solid #ccc";
+        document.getElementById("state-error").style.visibility = "hidden";
     }
+
+
     if(!zipReg){
         document.forms["Billing-Info"]["areaCode"].style.borderColor="#FD8182";
+        document.getElementById("zip-code-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Billing-Info"]["areaCode"].style.border = "1px solid #ccc";
+        document.getElementById("zip-code-error").style.visibility = "hidden";
     }
     return check;
 }
@@ -101,7 +143,7 @@ function checkCreditCard(){
     var csv_num = document.forms["Creditcard-Info"]["csv"].value;
 
     // Check regex
-    var cardNumber = new RegExp("^([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4})$");
+    var cardNumber = new RegExp("^([0-9]{4}-?[0-9]{4}-?[0-9]{4}-?[0-9]{4})$");
     var csv = new RegExp("^([0-9]{3})$");
     cardNumber.test(creditcard);
     csv.test(csv_num);
@@ -111,12 +153,19 @@ function checkCreditCard(){
     var year = document.getElementById("year").options;
     
     var check = 0;
+    // TODO FINISH HERE
     if(creditcard == null || creditcard == ""){
         document.forms["Creditcard-Info"]["card"].style.borderColor="#FD8182";
+        document.getElementById("credit-card-error").style.visibility = "visible";
         check = 1;
+    } else {
+
     }
+
+    
     if(csv_num == null || csv_num == ""){
         document.forms["Creditcard-Info"]["csv"].style.borderColor="#FD8182";
+        document.getElementById("csv-error").style.visibility = "visible";
         check = 1;
     }
     if(month[month.selectedIndex].value === ''){
