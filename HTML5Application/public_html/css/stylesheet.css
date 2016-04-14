@@ -330,3 +330,10 @@ form div i{
 }
 
 .submission:focus {outline:0;}
+
+#submit-error {
+    display: inline;
+    color: red;
+    font-family: sans-serif;
+    visibility: hidden;
+}

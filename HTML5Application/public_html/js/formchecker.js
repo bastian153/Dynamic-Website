@@ -26,7 +26,6 @@ function checkBookInformation(){
     }
 
 
-    if(quan_input == null || quan_input == "" || (isNaN(quan_input) && parseInt(quan_input) < 1)){
         document.forms["Book-Info"]["Quantity"].style.borderColor="#FD8182";
         document.getElementById("quantity-error").style.visibility = "visible";
         check = 1;
@@ -153,13 +152,13 @@ function checkCreditCard(){
     var year = document.getElementById("year").options;
     
     var check = 0;
-    // TODO FINISH HERE
     if(creditcard == null || creditcard == ""){
         document.forms["Creditcard-Info"]["card"].style.borderColor="#FD8182";
         document.getElementById("credit-card-error").style.visibility = "visible";
         check = 1;
     } else {
-
+        document.forms["Creditcard-Info"]["card"].style.border = "1px solid #ccc";
+        document.getElementById("credit-card-error").style.visibility = "hidden";
     }
 
     
@@ -167,14 +166,23 @@ function checkCreditCard(){
         document.forms["Creditcard-Info"]["csv"].style.borderColor="#FD8182";
         document.getElementById("csv-error").style.visibility = "visible";
         check = 1;
+    } else {
+        document.forms["Creditcard-Info"]["csv"].style.border = "1px solid #ccc";
+        document.getElementById("csv-error").style.visibility = "hidden";
     }
+
     if(month[month.selectedIndex].value === ''){
         document.forms["Creditcard-Info"]["month"].style.borderColor="#FD8182";
         check = 1;
+    } else {
+        document.forms["Creditcard-Info"]["month"].style.border = "1px solid #ccc";
     }
+
     if(year[year.selectedIndex].value === ''){
         document.forms["Creditcard-Info"]["year"].style.borderColor="#FD8182";
         check = 1;
+    } else {
+        document.forms["Creditcard-Info"]["year"].style.border = "1px solid #ccc";
     }
     return check;
 }
@@ -192,15 +200,17 @@ function checkValidation(){
     var lastN = document.forms["Billing-Info"]["lastName"].value;
     var addr = document.forms["Billing-Info"]["address"].value;
     var city = document.forms["Billing-Info"]["city"].value;
-    var state = document.getElementById("selectElementId").options;
+    var state = document.getElementById("selectElementId").value;
     var postalCode = document.forms["Billing-Info"]["areaCode"].value;
 
 
 
     if((check1+check2+check3+check4) !== 0){
         console.log("Error");
+        document.getElementById("submit-error").style.visibility = "visible";
     }
     else{
+        document.getElementById("submit-error").style.visibility = "hidden";
         var email = 'sample@gmail.com';
         var subject = 'Test';
         var emailBody = 'ISBN: ' + isbn_input + "%0A"
