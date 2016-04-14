@@ -25,7 +25,6 @@ function checkBookInformation(){
         document.getElementById("isbn-error").style.visibility = "hidden";
     }
 
-
         document.forms["Book-Info"]["Quantity"].style.borderColor="#FD8182";
         document.getElementById("quantity-error").style.visibility = "visible";
         check = 1;
