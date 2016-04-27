@@ -13,6 +13,7 @@ function checkBookInformation(){
     // Check Regex
     var isbn = new RegExp("^(([0-9]{3}-?)?[0-9]{10})$");
     var reg = isbn.test(isbn_input);
+
     
     // Check empty input field
     var check = 0;

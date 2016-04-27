@@ -5,15 +5,18 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 
-	<!-- Create States and Month options for select -->
-	<script type="text/javascript" src="js/my_script.js"></script>
-
 	<!-- Check each field of the form -->
 	<script type="text/javascript" src="js/formchecker.js"></script>
 
+	<!-- Include J-Query -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Include form.js -->
+	<script type="text/javascript" src="js/form.js"></script>
+
 </head>
 
-<body onload='main()'>
+<body>
 	<header>
 		<h1>Noble &amp Barnes</h1>
         <nav>
@@ -78,19 +81,30 @@
 				</div>
 
 				<div class="input-info">	
-					<input name="city" class="all-input" style="margin-left:39px" type="text" placeholder="City"></input>
-					<p id="city-error">Field is missing</p>
-				</div>
-				<div class="input-info">	
-					<select name="state" class="input-select" id="selectElementId" style="margin-left:39px">
+					<select name="state" class="input-select" id="selectStateId" style="margin-left:39px">
 						<option selected value="">State</option>
 					</select>
 					<p id="state-error">State was not selected</p>
 				</div>
-				<div class="input-info">	
+
+				<div class="input-info">			
+ 					<select name="city" class="input-select" id="selectCityId" style="margin-left:39px">
+						<option selected value="">City</option>
+					</select>
+ 					<p id="city-error">Field is missing</p>
+				</div>
+				
+				<!-- <div class="input-info">	
 					<input name="areaCode" class="all-input" style="margin-left:39px" type="text" placeholder="Postal Code"></input>
 					<p id="zip-code-error">Incorrect format: five digits, +4 Zip Code Optional</p>
+				</div> -->
+				<div class="input-info">			
+ 					<select name="zip" class="input-select" id="selectZipId" style="margin-left:39px">
+						<option selected value="">Zip</option>
+					</select>
+ 					<p id="city-error">Field is missing</p>
 				</div>
+
 			</form>
 		</div>
 
