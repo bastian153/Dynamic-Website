@@ -1,31 +1,17 @@
 <?php
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
+  require_once('dbconnection.php');
 
-  try {
-    // Create a connection to database
-    $conn = new PDO("mysql:host=". $servername . ";dbname=nobleandbarnes",
-                    $username, $password);
+  // Get all prodcut information from database
+  $stmt = $conn->prepare("SELECT bookName, name, isbn13, genre, price,
+                 cover FROM book, author WHERE authorID = id
+                 ORDER BY RAND()"); // Comment this to remove randomness
+  $stmt->execute();
 
-    // Get all prodcut information from database
-    $stmt = $conn->prepare("SELECT bookName, name, isbn13, genre, price,
-                   cover FROM book, author WHERE authorID = id
-                   ORDER BY RAND()"); // Comment this to remove randomness
-    $stmt->execute();
-
-    // Get total number of products available
-    $total = $conn->prepare("SELECT COUNT(*) AS total FROM book");
-    $total->execute();
-    $total = $total->fetch(PDO::FETCH_ASSOC)['total'];
-
-    http_response_code(200);
-
-  } catch(PDOException $e){ // Exception Handling
-    http_response_code(404);
-    print $sql . "<br>" . $e->getMessage();
-    exit(-1);
-  }
+  // Get total number of products available
+  $total = $conn->prepare("SELECT COUNT(*) AS total FROM book");
+  $total->execute();
+  $total = $total->fetch(PDO::FETCH_ASSOC);
+  $total = $total['total'];
 
   echo '<table class="col-12">';
   $count = 0;

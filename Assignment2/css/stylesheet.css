@@ -55,7 +55,7 @@ header nav ul li {
 }
 
 header nav ul li:hover{
-    background-color: #E62739;	
+    background-color: #E62739;
 }
 
 header nav ul a {
@@ -147,6 +147,10 @@ table tr td p {
     text-align: left;
 }
 
+.summary input {
+  text-align: center;
+}
+
 
 #author {
     padding: 20px;
@@ -170,7 +174,7 @@ table tr td p {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #89BDD3; 
+    background-color: #89BDD3;
     color: #FFFFFF;
 }
 
@@ -180,7 +184,7 @@ footer * {
 }
 
 /* Order form */
-.order_form{
+.order_form {
     width: 100%;
 }
 
@@ -231,7 +235,7 @@ footer * {
 .input-info{
     width: 100%;
     /*max-width: 400px;*/
-    margin-left: 0; 
+    margin-left: 0;
 }
 
 form div i{

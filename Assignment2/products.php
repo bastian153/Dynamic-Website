@@ -2,22 +2,13 @@
 <html>
 
 <?php
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
+  require_once('dbconnection.php');
+  
+  $stmt = $conn->prepare("SELECT * FROM book, author WHERE "
+                 . $_GET['isbn'] . " = isbn13 AND authorID = id");
+  $stmt->execute();
 
-  try {
-    $conn = new PDO("mysql:host=". $servername . ";dbname=nobleandbarnes",
-                    $username, $password);
-    $stmt = $conn->prepare("SELECT * FROM book, author WHERE "
-                   . $_GET['isbn'] . " = isbn13 AND authorID = id");
-    $stmt->execute();
-
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  } catch(PDOException $e){
-    echo $sql . "<br>" . $e->getMessage();
-    exit(-1);
-  }
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
   echo '<head>';
@@ -32,8 +23,8 @@
       <h1>Noble &amp Barnes</h1>
       <nav>
         <ul>
-          <a href="../index.html"><li class="col-6">Products</li></a>
-          <a href="../about.html"><li class="col-6">About</li></a>
+          <a href="index.html"><li class="col-6">Products</li></a>
+          <a href="about.html"><li class="col-6">About</li></a>
         </ul>
       </nav>
     </header>
@@ -58,8 +49,8 @@
       <?php
         echo $row['summary'];
       ?>
-    <input type="button" onclick="location.href='../form.html'"
-        class="submission" value="Order" />
+      <input type="button" onclick="location.href='form.html'"
+          class="submission" value="Order" />
     </div>
   </div>
 
