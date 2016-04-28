@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$("#selectStateId").focus(function(){
+	$("#selectStateId").on('focus', function(){
 		$.ajax({
 			url: "states.php",
 			method: "GET",
@@ -24,7 +24,14 @@ $(document).ready(function () {
 				data: "state_id="+stateID,
 				dataType: 'json',
 				success: function(data){
+					// empty list of cities when state changes
 					$("#selectCityId").empty();
+					// empty list of zip codes when state changes
+					var zipText = document.createElement("option");
+					zipText.innerHTML = "Zip";
+					zipText.value = "";
+					$("#selectZipId").empty().append(zipText);
+					// append new new list of cities with new state
 					for(var i = 0; i < data.length; i++){
 						var text = document.createElement("option");
 						text.innerHTML = data[i]['city'];
@@ -34,10 +41,21 @@ $(document).ready(function () {
 				}
 			})
 		}
+		else{
+			var cityText = document.createElement("option");
+			cityText.innerHTML = "City";
+			cityText.value = "";
+			var zipText = document.createElement("option");
+			zipText.innerHTML = "Zip";
+			zipText.value = "";
+			$("#selectCityId").empty().append(cityText);
+			$("#selectZipId").empty().append(zipText);
+		}
 	});
 
 	$("#selectCityId").on('change', function(){
 		var cityID = $(this).val();
+		console.log(cityID);
 		if(cityID){
 			$.ajax({
 				url: "zip.php",
