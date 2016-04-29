@@ -42,9 +42,9 @@ function checkBillingInformation(){
     var firstN = document.forms["Billing-Info"]["firstName"].value;
     var lastN = document.forms["Billing-Info"]["lastName"].value;
     var addr = document.forms["Billing-Info"]["address"].value;
-    var city = document.getElementById("selectCityId").options;
     var state = document.getElementById("selectStateId").options;
-    var zipcode = document.getElementById("selectZipId").options;
+    var city = document.forms["Billing-Info"]["city"].value;
+    var zipcode = document.forms["Billing-Info"]["zip"].value;
 
     // Check Regex
     var first = new RegExp("([a-zA-Z]+)");
@@ -57,8 +57,7 @@ function checkBillingInformation(){
     var lastReg = last.test(lastN);
     var addrReg = address.test(addr);
     var cityReg = r_city.test(city);
-    var zipReg = zip.test(zip);
-
+    var zipReg = zip.test(zipcode);
     // Check empty input field
     var check = 0;
     if(!firstReg){
@@ -90,7 +89,7 @@ function checkBillingInformation(){
         document.getElementById("address-error").style.visibility = "hidden";
     }
 
-    if(city[city.selectedIndex].value === ""){
+    if(!cityReg){
         document.forms["Billing-Info"]["city"].style.borderColor="#FD8182";
         document.getElementById("city-error").style.visibility = "visible";
         check = 1;
@@ -108,7 +107,7 @@ function checkBillingInformation(){
         document.getElementById("state-error").style.visibility = "hidden";
     }
 
-    if(zipcode[zipcode.selectedIndex].text === ""){
+    if(!zipReg){
         document.forms["Billing-Info"]["zip"].style.borderColor="#FD8182";
         document.getElementById("zip-error").style.visibility = "visible";
         check = 1;
@@ -215,9 +214,9 @@ function checkValidation(){
     // var city = document.forms["Billing-Info"]["city"].value;
     // var state = document.getElementById("selectElementId").value;
     // var postalCode = document.forms["Billing-Info"]["areaCode"].value;
-    var city = document.getElementById("selectCityId").options;
     var state = document.getElementById("selectStateId").options;
-    var zipcode = document.getElementById("selectZipId").options;
+    var city = document.forms["Billing-Info"]["city"].value;
+    var zipcode = document.forms["Billing-Info"]["zip"].value;
 
     if((check1+check2+check3+check4) !== 0){
         console.log("Error");
@@ -243,9 +242,9 @@ function checkValidation(){
           firstN,
           lastN,
           addr,
-          city[city.selectedIndex].value,
+          city,
           state[state.selectedIndex].value,
-          zipcode[zipcode.selectedIndex].text);
+          zipcode);
           window.location = "confirmation.php?isbn=" + isbn_input;
     }
 }
