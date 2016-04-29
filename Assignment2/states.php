@@ -1,10 +1,7 @@
 <?php
-	$servername = "localhost";
-  	$username = "root";
-  	$password = "";
+    require_once('dbconnection.php');
 
   	try {
-  		$conn = new PDO("mysql:host=" . $servername . ";dbname=nobleandbarnes;", $username, $password);
   		$stmt = $conn->prepare("SELECT DISTINCT state FROM zips");
   		$stmt->execute();
   		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

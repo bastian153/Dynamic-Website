@@ -1,11 +1,8 @@
 <?php
-	$servername = "localhost";
-  	$username = "root";
-  	$password = "";
+	require_once('dbconnection.php');
 
   	if(isset($_REQUEST["q"]) && !empty($_REQUEST["q"])){
 	  	try {
-	  		$conn = new PDO("mysql:host=" . $servername . ";dbname=nobleandbarnes;", $username, $password);
 	  		$stmt = $conn->prepare("SELECT DISTINCT city FROM zips WHERE city LIKE" . "'" . $_REQUEST["q"] . "%'
                                 ORDER BY city");
 	  		$stmt->execute();
