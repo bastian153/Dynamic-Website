@@ -1,5 +1,5 @@
 /*
- * 
+ *
  * To check if regular expression matches
  *      variable.test(stringToMatch);
  */
@@ -14,7 +14,7 @@ function checkBookInformation(){
     var isbn = new RegExp("^(([0-9]{3}-?)?[0-9]{10})$");
     var reg = isbn.test(isbn_input);
 
-    
+
     // Check empty input field
     var check = 0;
     if(isbn_input == null || isbn_input == ""){
@@ -38,13 +38,13 @@ function checkBookInformation(){
 
 
 // Section 2
-function checkBillingInformation(){    
+function checkBillingInformation(){
     var firstN = document.forms["Billing-Info"]["firstName"].value;
     var lastN = document.forms["Billing-Info"]["lastName"].value;
     var addr = document.forms["Billing-Info"]["address"].value;
-    var city = document.forms["Billing-Info"]["city"].value;
-    var state = document.getElementById("selectElementId").options;
-    var postalCode = document.forms["Billing-Info"]["areaCode"].value;
+    var city = document.getElementById("selectCityId").options;
+    var state = document.getElementById("selectStateId").options;
+    var zipcode = document.getElementById("selectZipId").options;
 
     // Check Regex
     var first = new RegExp("([a-zA-Z]+)");
@@ -57,7 +57,7 @@ function checkBillingInformation(){
     var lastReg = last.test(lastN);
     var addrReg = address.test(addr);
     var cityReg = r_city.test(city);
-    var zipReg = zip.test(postalCode);
+    var zipReg = zip.test(zip);
 
     // Check empty input field
     var check = 0;
@@ -90,7 +90,7 @@ function checkBillingInformation(){
         document.getElementById("address-error").style.visibility = "hidden";
     }
 
-    if(!cityReg){
+    if(city[city.selectedIndex].value === ""){
         document.forms["Billing-Info"]["city"].style.borderColor="#FD8182";
         document.getElementById("city-error").style.visibility = "visible";
         check = 1;
@@ -108,14 +108,13 @@ function checkBillingInformation(){
         document.getElementById("state-error").style.visibility = "hidden";
     }
 
-
-    if(!zipReg){
-        document.forms["Billing-Info"]["areaCode"].style.borderColor="#FD8182";
-        document.getElementById("zip-code-error").style.visibility = "visible";
+    if(zipcode[zipcode.selectedIndex].text === ""){
+        document.forms["Billing-Info"]["zip"].style.borderColor="#FD8182";
+        document.getElementById("zip-error").style.visibility = "visible";
         check = 1;
     } else {
-        document.forms["Billing-Info"]["areaCode"].style.border = "1px solid #ccc";
-        document.getElementById("zip-code-error").style.visibility = "hidden";
+        document.forms["Billing-Info"]["zip"].style.border = "1px solid #ccc";
+        document.getElementById("zip-error").style.visibility = "hidden";
     }
     return check;
 }
@@ -146,11 +145,11 @@ function checkCreditCard(){
     var csv = new RegExp("^([0-9]{3})$");
     cardNumber.test(creditcard);
     csv.test(csv_num);
-    
+
     // Check Month and year
     var month = document.getElementById("month").options;
     var year = document.getElementById("year").options;
-    
+
     var check = 0;
     if(creditcard == null || creditcard == ""){
         document.forms["Creditcard-Info"]["card"].style.borderColor="#FD8182";
@@ -161,7 +160,7 @@ function checkCreditCard(){
         document.getElementById("credit-card-error").style.visibility = "hidden";
     }
 
-    
+
     if(csv_num == null || csv_num == ""){
         document.forms["Creditcard-Info"]["csv"].style.borderColor="#FD8182";
         document.getElementById("csv-error").style.visibility = "visible";
@@ -187,6 +186,20 @@ function checkCreditCard(){
     return check;
 }
 
+function sendToDB(isbn_input, quan_input, firstN, lastN, addr, city, state, zipcode){
+    var dataString = 'isbn_input='+ isbn_input + '&quan_input='+ quan_input + '&firstN='+ firstN + '&lastN='+ lastN + '&addr=' + addr + '&city=' + city + '&state=' + state + '&zipcode=' + zipcode;
+
+    $.ajax({
+        type: "POST",
+        url: "dbstorage.php" ,
+        data: dataString,
+        cache: false,
+        success : function(html) {
+          $('#msg').html(html);
+        }
+    });
+}
+
 function checkValidation(){
     var check1 = checkBookInformation();
     var check2 = checkBillingInformation();
@@ -199,11 +212,12 @@ function checkValidation(){
     var firstN = document.forms["Billing-Info"]["firstName"].value;
     var lastN = document.forms["Billing-Info"]["lastName"].value;
     var addr = document.forms["Billing-Info"]["address"].value;
-    var city = document.forms["Billing-Info"]["city"].value;
-    var state = document.getElementById("selectElementId").value;
-    var postalCode = document.forms["Billing-Info"]["areaCode"].value;
-
-
+    // var city = document.forms["Billing-Info"]["city"].value;
+    // var state = document.getElementById("selectElementId").value;
+    // var postalCode = document.forms["Billing-Info"]["areaCode"].value;
+    var city = document.getElementById("selectCityId").options;
+    var state = document.getElementById("selectStateId").options;
+    var zipcode = document.getElementById("selectZipId").options;
 
     if((check1+check2+check3+check4) !== 0){
         console.log("Error");
@@ -211,17 +225,27 @@ function checkValidation(){
     }
     else{
         document.getElementById("submit-error").style.visibility = "hidden";
-        var email = 'sample@gmail.com';
-        var subject = 'Test';
-        var emailBody = 'ISBN: ' + isbn_input + "%0A"
-                       +'Quantity: ' + quan_input + "%0A%0A"
-                       +'Shipping Information:' + "%0A" 
-                       +'First Name: ' + firstN + "%0A"
-                       +'Last Name: ' + lastN + "%0A"
-                       +'Address: ' + addr + "%0A"
-                       +'City: ' + city + "%0A"
-                       +'State: ' + state + "%0A"
-                       +'Zip Code: ' + postalCode + "%0A%0A";
-        window.location = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody;
+        // var email = 'sample@gmail.com';
+        // var subject = 'Test';
+        // var emailBody = 'ISBN: ' + isbn_input + "%0A"
+        //                +'Quantity: ' + quan_input + "%0A%0A"
+        //                +'Shipping Information:' + "%0A"
+        //                +'First Name: ' + firstN + "%0A"
+        //                +'Last Name: ' + lastN + "%0A"
+        //                +'Address: ' + addr + "%0A"
+        //                +'City: ' + city[city.selectedIndex].value + "%0A"
+        //                +'State: ' + state[state.selectedIndex].value + "%0A"
+        //                +'Zip Code: ' + zipcode[zipcode.selectedIndex].value + "%0A%0A";
+        // window.location = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody;
+
+        sendToDB(isbn_input,
+          quan_input,
+          firstN,
+          lastN,
+          addr,
+          city[city.selectedIndex].value,
+          state[state.selectedIndex].value,
+          zipcode[zipcode.selectedIndex].text);
+          window.location = "confirmation.php?isbn=" + isbn_input;
     }
 }

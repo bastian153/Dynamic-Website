@@ -55,7 +55,7 @@ $(document).ready(function () {
 
 	$("#selectCityId").on('change', function(){
 		var cityID = $(this).val();
-		console.log(cityID);
+		//console.log(cityID);
 		if(cityID){
 			$.ajax({
 				url: "zip.php",

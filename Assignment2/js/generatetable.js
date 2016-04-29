@@ -1,4 +1,4 @@
-var http;
+var xhttp;
 
 function main(cfunc) {
 	xhttp = new XMLHttpRequest();
