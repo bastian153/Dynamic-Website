@@ -3,14 +3,20 @@
   	$username = "root";
   	$password = "";
 
-  	if(isset($_GET["city_id"]) && !empty($_GET["city_id"])){
+  	if(isset($_REQUEST["q"]) && !empty($_REQUEST["q"])){
 	  	try {
 	  		$conn = new PDO("mysql:host=" . $servername . ";dbname=nobleandbarnes;", $username, $password);
-	  		$stmt = $conn->prepare("SELECT zip FROM zips WHERE city=" . "'" . $_GET["city_id"] . "'");
+	  		$stmt = $conn->prepare("SELECT zip FROM zips WHERE zip LIKE" . "'" . $_REQUEST["q"] . "%'");
 	  		$stmt->execute();
-	  		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	  		$json = json_encode($result);
-	  		echo $json;
+	  		
+	  		$return_arr = array();
+
+	  		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+	  			array_push($return_arr,$row['zip']);
+	  		}
+
+	  		echo json_encode($return_arr);
+
 	  	} catch(PDOException $e){
 	  		print "Error Occured!" . "<br>" . $e->getMessage();
 	  		exit(-1);
