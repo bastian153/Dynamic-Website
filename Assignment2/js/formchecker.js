@@ -193,8 +193,8 @@ function sendToDB(isbn_input, quan_input, firstN, lastN, addr, city, state, zipc
         url: "dbstorage.php" ,
         data: dataString,
         cache: false,
-        success : function(html) {
-          $('#msg').html(html);
+        success : function(response) {
+          window.location = "confirmation.php?order=" + response;
         }
     });
 }
@@ -224,19 +224,6 @@ function checkValidation(){
     }
     else{
         document.getElementById("submit-error").style.visibility = "hidden";
-        // var email = 'sample@gmail.com';
-        // var subject = 'Test';
-        // var emailBody = 'ISBN: ' + isbn_input + "%0A"
-        //                +'Quantity: ' + quan_input + "%0A%0A"
-        //                +'Shipping Information:' + "%0A"
-        //                +'First Name: ' + firstN + "%0A"
-        //                +'Last Name: ' + lastN + "%0A"
-        //                +'Address: ' + addr + "%0A"
-        //                +'City: ' + city[city.selectedIndex].value + "%0A"
-        //                +'State: ' + state[state.selectedIndex].value + "%0A"
-        //                +'Zip Code: ' + zipcode[zipcode.selectedIndex].value + "%0A%0A";
-        // window.location = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody;
-
         sendToDB(isbn_input,
           quan_input,
           firstN,
@@ -245,6 +232,5 @@ function checkValidation(){
           city,
           state[state.selectedIndex].value,
           zipcode);
-          window.location = "confirmation.php?isbn=" + isbn_input;
     }
 }

@@ -2,13 +2,20 @@
 <html>
 
 <?php
- require_once('dbconnection.php');
+  require_once('dbconnection.php');
 
-  $stmt = $conn->prepare("SELECT * FROM orders WHERE "
-                . $_GET['isbn'] . " = isbn13");
-  $stmt->execute();
+  // Get the Order record
+  $orderStmt = $conn->prepare("SELECT * FROM orders WHERE "
+                . $_GET['order'] . " = id");
+  $orderStmt->execute();
+  $order = $orderStmt->fetch(PDO::FETCH_ASSOC);
 
- $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  // Get the Book record 
+  $bookStmt = $conn->prepare("SELECT * FROM book WHERE "
+                . $order['isbn13'] . " = isbn13");
+  $bookStmt->execute();
+  $book = $bookStmt->fetch(PDO::FETCH_ASSOC);
+
 
 
   echo '<head>';
@@ -23,11 +30,13 @@
       <h1>Noble &amp Barnes</h1>
 
     </header>
-      <?php
-       echo $row['first_name'];
-       echo $row['last_name'];
 
-      ?>
-</body>
+    <footer>
+      <h3>Support #: 1-800-555-1632</h3>
+      <h3>Support Email: <a href="mailto:support@noble.com">
+            support@noble.com</a></h3>
+      <h3>Noble &amp Bares &copy 2016</h3>
+    </footer>
 
+  </body>
 </html>

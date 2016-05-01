@@ -6,7 +6,7 @@
 	  		$stmt = $conn->prepare("SELECT DISTINCT city FROM zips WHERE city LIKE" . "'" . $_REQUEST["q"] . "%'
                                 ORDER BY city");
 	  		$stmt->execute();
-	  		
+
 	  		$return_arr = array();
 
 	  		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){

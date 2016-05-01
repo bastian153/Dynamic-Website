@@ -12,12 +12,14 @@
   $zipCode = $_POST["zipcode"];
 
   $stmt = $conn->prepare("INSERT INTO orders
-                          (first_name, last_name, address, state, city, zip_code, isbn13, quantity)
+                          (first_name, last_name, address, state, city, zp_code, isbn13, quantity)
                           VALUES
                           ('$firstName', '$lastName', '$address', '$state', '$city', '$zipCode', '$isbn', '$quantity')"); // Comment this to remove randomness
   $stmt->execute();
-
 } catch(PDOException $e){
   echo "Response: Error";
+  die();
 }
+  echo $conn->lastInsertId();
+  $conn = null;
 ?>
