@@ -42,7 +42,7 @@ function checkBillingInformation(){
     var firstN = document.forms["Billing-Info"]["firstName"].value;
     var lastN = document.forms["Billing-Info"]["lastName"].value;
     var addr = document.forms["Billing-Info"]["address"].value;
-    var state = document.getElementById("selectStateId").options;
+    var state = document.forms["Billing-Info"]["state"].options;
     var city = document.forms["Billing-Info"]["city"].value;
     var zipcode = document.forms["Billing-Info"]["zip"].value;
 

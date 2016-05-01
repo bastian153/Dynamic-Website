@@ -3,7 +3,7 @@
 
 <?php
   require_once('dbconnection.php');
-  
+
   $stmt = $conn->prepare("SELECT * FROM book, author WHERE "
                  . $_GET['isbn'] . " = isbn13 AND authorID = id");
   $stmt->execute();
@@ -49,7 +49,8 @@
       <?php
         echo $row['summary'];
       ?>
-      <input type="button" onclick="location.href='form.html'"
+      <input type="button" onclick="location.href='form.html?isbn=<?php
+        echo $row['isbn13'];?>'"
           class="submission" value="Order" />
     </div>
   </div>

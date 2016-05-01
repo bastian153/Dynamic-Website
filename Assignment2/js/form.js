@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	getQueryStringParam();
+
 	$.ajax({
 		url: "states.php",
 		method: "GET",
@@ -47,5 +49,11 @@ $(document).ready(function () {
 			}
 		})
 	})
+
+	function getQueryStringParam(){
+    var query = window.location['search'];
+    var isbn = query.split("=")[1];
+    document.forms["Book-Info"]["ISBN"].value = isbn;
+  }
 
 })
