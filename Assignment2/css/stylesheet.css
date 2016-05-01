@@ -345,3 +345,14 @@ form div i{
     font-family: sans-serif;
     visibility: hidden;
 }
+
+.details * {
+  border: 1px solid red;
+  font-family: sans-serif;
+  text-align: center;
+  margin: 3px;
+}
+
+.details img {
+  height: 300px;
+}
