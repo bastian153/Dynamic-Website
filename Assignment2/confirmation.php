@@ -33,7 +33,7 @@
     </nav>
   </header>
 
-  <div class="col-12 details">
+  <div class="col-12 details" align="center">
     <div class="col-12">
       <h2>Confirmation Order ID#: <?php echo $order['id'];?> </h2>
     </div>
