@@ -45,18 +45,19 @@ public class ProductDetails extends HttpServlet {
         out.println("<h1>" + s.getId() + "</h1>");
         LinkedList<String> recent = (LinkedList<String>)request.getAttribute("view");
         if(recent == null){
-            out.println("<h1>" + recent + "</h1>");
+            out.println("<h1>Attribute: " + recent + "</h1>");
             recent = new LinkedList<String>();
             recent.add(isbn);
-            request.setAttribute("view", recent);
+            s.setAttribute("view", recent);
             out.println("<h1>" + recent + "</h1>");
             return;
         }
         
+        out.println("<h1>Exists!</h1>");
         if(recent.contains(isbn))
             recent.remove(isbn);
         recent.addFirst(isbn);
-        //request.setAttribute("view", recent);
+        s.setAttribute("view", recent);
         out.println("<h1>Added</h1>");
     }
     
