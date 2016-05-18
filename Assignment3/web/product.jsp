@@ -12,16 +12,12 @@
             <h1>Noble &amp Barnes</h1>
             <nav>
                 <ul>
-                    <a href="./index.jsp"><li class="col-6">Products</li></a>
+                    <a href="Products"><li class="col-6">Products</li></a>
                     <a href="./about.html"><li class="col-6">About</li></a>
                 </ul>
             </nav>
         </header>
-        
-        <%
-        Object obj = request.getSession().getAttribute("object");
-        out.print(obj);
-        %>
+    
         <div class="col-12 description">
              <div class="col-5">
                  <jsp:include page="ProductDetails"/>

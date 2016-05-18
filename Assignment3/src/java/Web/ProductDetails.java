@@ -29,7 +29,7 @@ public class ProductDetails extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String isbn = request.getParameter("isbn");
-            addProductViewed(request, isbn, out);            
+            addProductViewed(request, isbn);            
             Connection c = DatabaseHelper.loginDatbase();
             queryProduct(c, out, isbn);
             DatabaseHelper.logoutDatabase(c);
@@ -40,24 +40,20 @@ public class ProductDetails extends HttpServlet {
     }
     
     
-    private void addProductViewed(HttpServletRequest request, String isbn, PrintWriter out){
+    private void addProductViewed(HttpServletRequest request, String isbn){
         HttpSession s = request.getSession();
-        out.println("<h1>" + s.getId() + "</h1>");
-        LinkedList<String> recent = (LinkedList<String>)request.getAttribute("view");
+        LinkedList<String> recent = (LinkedList<String>)s.getAttribute("view");
         if(recent == null){
-            out.println("<h1>" + recent + "</h1>");
             recent = new LinkedList<String>();
             recent.add(isbn);
-            request.setAttribute("view", recent);
-            out.println("<h1>" + recent + "</h1>");
+            s.setAttribute("view", recent);
             return;
         }
         
         if(recent.contains(isbn))
             recent.remove(isbn);
         recent.addFirst(isbn);
-        //request.setAttribute("view", recent);
-        out.println("<h1>Added</h1>");
+        s.setAttribute("view", recent);
     }
     
     
