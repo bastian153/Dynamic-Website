@@ -25,7 +25,6 @@ public class CustomerSeenProducts extends HttpServlet {
         if(recentlyViewed != null && !recentlyViewed.isEmpty() && !s.isNew()){
             try (PrintWriter out = response.getWriter()) {
                 out.println("<div class=\"recent\">");
-                out.println("<h2>Your ID: " + s.getId() + "</h2>");
                 out.println("<h2>Recently Viewed Products</h2>");
                 displayRecentProducts(recentlyViewed, out);
                 out.println("</div>");
