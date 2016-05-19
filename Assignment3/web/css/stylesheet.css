@@ -341,3 +341,8 @@ form div i{
     font-family: sans-serif;
     visibility: hidden;
 }
+
+
+.recent * {
+    font-family: sans-serif;
+}

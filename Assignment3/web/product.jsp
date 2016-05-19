@@ -13,7 +13,7 @@
             <nav>
                 <ul>
                     <a href="Products"><li class="col-6">Products</li></a>
-                    <a href="./about.html"><li class="col-6">About</li></a>
+                    <a href="./about.jsp"><li class="col-6">About</li></a>
                 </ul>
             </nav>
         </header>
