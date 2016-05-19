@@ -84,7 +84,6 @@ nbactions.xml
 # Logs and databases #
 ######################
 *.log
-*.sql
 *.sqlite
 
 # OS generated files #
@@ -96,4 +95,3 @@ nbactions.xml
 .Trashes
 ehthumbs.db
 Thumbs.db
-*.xml
