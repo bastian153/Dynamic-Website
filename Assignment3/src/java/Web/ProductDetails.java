@@ -29,7 +29,8 @@ public class ProductDetails extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String isbn = request.getParameter("isbn");
-            addProductViewed(request, isbn);            
+            addProductViewed(request, isbn);  
+            displayHeader(request, out);
             Connection c = DatabaseHelper.loginDatbase();
             queryProduct(c, out, isbn);
             DatabaseHelper.logoutDatabase(c);
@@ -37,6 +38,22 @@ public class ProductDetails extends HttpServlet {
                on Most Viewed Products and include footer.jsp*/ 
             getProductsViewed(request, response);
         } 
+    }
+    
+    
+    private void displayHeader(HttpServletRequest request, PrintWriter out){
+        out.println("<!DOCTYPE html>"
+                + "<html>"
+                + "<head>"
+                + "<title>Noble &amp Barnes:Product Details</title>"
+                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylesheet.css\""
+                + "</head>"
+                + "<body>"
+                + "<header><h1>Noble &amp Barnes</h1>"
+                + "<nav><ul>"
+                + "<a href=\"Products\"><li class=\"col-6\">Products</li></a>"
+                + "<a href=\"./about.jsp\"><li class=\"col-6\">About</li></a>"
+                + "</ul></nav></header>");
     }
     
     
@@ -54,8 +71,8 @@ public class ProductDetails extends HttpServlet {
             recent.remove(isbn);
         recent.addFirst(isbn);
         s.setAttribute("view", recent);
-    }
-    
+    }                    
+                         
     
     private void queryProduct(Connection c, PrintWriter out, String isbn){
         String stmt = "SELECT * FROM book, author WHERE "
@@ -64,6 +81,8 @@ public class ProductDetails extends HttpServlet {
             PreparedStatement pstmt = c.prepareStatement(stmt);
             ResultSet r = pstmt.executeQuery();
             r.next();
+            out.println("<div class=\"col-12 description\">"
+                    + "<div class=\"col-5\">");
             
             // Product Information
             out.println("<img src=\"" + r.getString("cover")

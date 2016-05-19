@@ -90,7 +90,7 @@ public class Products extends HttpServlet {
     private static void displayTableCell(ResultSet result, PrintWriter out){
         try {
             out.println("<td class=\"col-4\">");
-            out.println("<a href=product.jsp?isbn=" 
+            out.println("<a href=ProductDetails?isbn=" 
                     + result.getString("isbn13") + ">");
             out.println("<img src="+ result.getString("cover") + " alt=\""
                     + result.getString("bookName") + "\">");
