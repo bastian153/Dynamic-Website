@@ -6,7 +6,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +44,8 @@ public class ProductDetails extends HttpServlet {
             DatabaseHelper.logoutDatabase(c);
             /* TODO: Finish this method, add servlet context 
                on Most Viewed Products and include footer.jsp*/ 
-            getProductsViewed(request, response);
+            getProductsViewed(request.getServletContext(), isbn, out);
+            displayFooter(request, response);
         } 
     }
     
@@ -61,7 +70,7 @@ public class ProductDetails extends HttpServlet {
         HttpSession s = request.getSession();
         LinkedList<String> recent = (LinkedList<String>)s.getAttribute("view");
         if(recent == null){
-            recent = new LinkedList<String>();
+            recent = new LinkedList<>();
             recent.add(isbn);
             s.setAttribute("view", recent);
             return;
@@ -113,12 +122,93 @@ public class ProductDetails extends HttpServlet {
         }
     }
     
-    private void getProductsViewed(HttpServletRequest request, 
-                                        HttpServletResponse response){
+    private void getProductsViewed(ServletContext context, String isbn, PrintWriter out){
         // TODO: Create Servlet Context Object for most Viewed Products
         // TODO: Include footer.jsp for the rest of the webpage
+        Map<String, Integer> mostViewed = (Map<String, Integer>)context.getAttribute("mostViewed");
+        if(mostViewed == null){
+            mostViewed = new LinkedHashMap<String, Integer>();
+        }
+        
+        Integer visiters = mostViewed.get(isbn);
+        if(visiters == null){
+            mostViewed.put(isbn, 1);
+        } else {
+            mostViewed.put(isbn, visiters + 1);
+        }
+        context.setAttribute("mostViewed", mostViewed);
+        
+        Connection c = DatabaseHelper.loginDatbase();
+        mostViewed = sortByValue(mostViewed);
+        Iterator it = mostViewed.entrySet().iterator();
+        
+        out.println("<div class=\"recent\">"
+                + "<table class\"col-12\">"
+                + "<h2>Currently Viewed Products</h2>"
+                + "<tr>");
+        
+        int count = 0;
+        int size = Math.min(5, mostViewed.size());
+        while(it.hasNext() && count < size){
+            Map.Entry pair = (Map.Entry)it.next();
+            String stmt = "SELECT * FROM book, author WHERE "
+                + pair.getKey() + " = isbn13 AND authorID = id";
+            try {
+                PreparedStatement pstmt = c.prepareStatement(stmt);
+                ResultSet result = pstmt.executeQuery();
+                result.next();
+                out.println("<td class=\"col-3\">");
+                out.println("<a href=ProductDetails?isbn=" 
+                    + result.getString("isbn13") + ">");
+                out.println("<img src="+ result.getString("cover") + " alt=\""
+                        + result.getString("bookName") + "\">");
+                out.println("<p>" + result.getString("bookName") + "</p>");
+                out.println("<p>Author: " + result.getString("name") + "</p>");
+                out.println("<p>Genre: " + result.getString("genre") + "</p>");
+                out.println("<p>ISBN-13: " 
+                        + result.getString("isbn13").substring(0, 3) + "-"
+                        + result.getString("isbn13").substring(3) + "</p>");
+                out.println("<p>Price: $" + result.getString("price") + "</p>");
+                out.println("<p>Most Currently Viewing: " + pair.getValue());
+                out.println("</a></td>");
+            } catch(SQLException ignore){}
+            count += 1;
+        }
+        
+        DatabaseHelper.logoutDatabase(c);
+        out.println("</tr></table></div>");
     }
     
+    
+    private <K, V extends Comparable<? super V>> Map<K, V> 
+        sortByValue( Map<K, V> map )
+    {
+        List<Map.Entry<K, V>> list =
+            new LinkedList<>( map.entrySet() );
+        Collections.sort( list, new Comparator<Map.Entry<K, V>>()
+        {
+            @Override
+            public int compare( Map.Entry<K, V> o1, Map.Entry<K, V> o2 )
+            {
+                return (o2.getValue()).compareTo( o1.getValue() );
+            }
+        } );
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list)
+        {
+            result.put( entry.getKey(), entry.getValue() );
+        }
+        return result;
+    }
+        
+        
+    private void displayFooter(HttpServletRequest request, HttpServletResponse response){
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher("/footer.jsp");
+            rd.include(request, response);
+        } catch(ServletException | IOException ignore){}
+    }
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

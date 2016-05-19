@@ -30,7 +30,7 @@ public class CustomerSeenProducts extends HttpServlet {
                 out.println("</div>");
             } catch(Exception ignore){}
         }
-        RequestDispatcher rd = request.getRequestDispatcher("footer.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/footer.jsp");
         rd.include(request, response);
     }
     
@@ -49,7 +49,7 @@ public class CustomerSeenProducts extends HttpServlet {
                 result.next();
                 
                 out.println("<td class=\"col-3\">");
-                out.println("<a href=product.jsp?isbn=" 
+                out.println("<a href=ProductDetails?isbn=" 
                     + result.getString("isbn13") + ">");
                 out.println("<img src="+ result.getString("cover") + " alt=\""
                         + result.getString("bookName") + "\">");

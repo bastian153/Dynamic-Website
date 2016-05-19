@@ -20,14 +20,7 @@ public class DatabaseHelper {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            // LOCAL SQL Database
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            
-            // ICS SQL Database
-            /*
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/nobleandbarnes", 
-                    USERNAME, PASSWORD);
-            */
         } catch(ClassNotFoundException | SQLException e) {
             return null;
         }
