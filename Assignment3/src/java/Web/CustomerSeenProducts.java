@@ -48,7 +48,7 @@ public class CustomerSeenProducts extends HttpServlet {
                 ResultSet result = pstmt.executeQuery();
                 result.next();
                 
-                out.println("<td class=\"col-3\">");
+                out.println("<td class=\"col-2\">");
                 out.println("<a href=ProductDetails?isbn=" 
                     + result.getString("isbn13") + ">");
                 out.println("<img src="+ result.getString("cover") + " alt=\""

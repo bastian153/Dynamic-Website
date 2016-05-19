@@ -144,7 +144,7 @@ public class ProductDetails extends HttpServlet {
         
         out.println("<div class=\"recent\">"
                 + "<table class\"col-12\">"
-                + "<h2>Currently Viewed Products</h2>"
+                + "<h2>Most Currently Viewed Products</h2>"
                 + "<tr>");
         
         int count = 0;
@@ -157,7 +157,7 @@ public class ProductDetails extends HttpServlet {
                 PreparedStatement pstmt = c.prepareStatement(stmt);
                 ResultSet result = pstmt.executeQuery();
                 result.next();
-                out.println("<td class=\"col-3\">");
+                out.println("<td class=\"col-2\">");
                 out.println("<a href=ProductDetails?isbn=" 
                     + result.getString("isbn13") + ">");
                 out.println("<img src="+ result.getString("cover") + " alt=\""
@@ -169,7 +169,7 @@ public class ProductDetails extends HttpServlet {
                         + result.getString("isbn13").substring(0, 3) + "-"
                         + result.getString("isbn13").substring(3) + "</p>");
                 out.println("<p>Price: $" + result.getString("price") + "</p>");
-                out.println("<p>Most Currently Viewing: " + pair.getValue());
+                out.println("<p>Currently Viewing: " + pair.getValue() + "</p>");
                 out.println("</a></td>");
             } catch(SQLException ignore){}
             count += 1;
