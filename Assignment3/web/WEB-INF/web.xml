@@ -16,6 +16,10 @@
         <servlet-name>Products</servlet-name>
         <servlet-class>Web.Products</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LeavingCustomer</servlet-name>
+        <servlet-class>Web.LeavingCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerSeenProducts</servlet-name>
         <url-pattern>/CustomerSeenProducts</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Products</servlet-name>
         <url-pattern>/Products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LeavingCustomer</servlet-name>
+        <url-pattern>/LeavingCustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

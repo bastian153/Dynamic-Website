@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +44,7 @@ public class ProductDetails extends HttpServlet {
             DatabaseHelper.logoutDatabase(c);
             /* TODO: Lower view count when user leaves the page */
             getProductsViewed(request, isbn, out);
+            displayFooter(request, response);
         } 
     }
     
@@ -204,7 +206,15 @@ public class ProductDetails extends HttpServlet {
     }
 
     
-
+    private void displayFooter(HttpServletRequest request, 
+            HttpServletResponse response){
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher("/footer.jsp");
+            rd.include(request, response);
+        } catch(ServletException | IOException ignore){}
+    }
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
