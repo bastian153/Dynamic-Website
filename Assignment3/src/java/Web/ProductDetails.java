@@ -13,7 +13,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,10 +41,8 @@ public class ProductDetails extends HttpServlet {
             Connection c = DatabaseHelper.loginDatbase();
             queryProduct(c, out, isbn);
             DatabaseHelper.logoutDatabase(c);
-            /* TODO: Finish this method, add servlet context 
-               on Most Viewed Products and include footer.jsp*/ 
+            /* TODO: Lower view count when user leaves the page */
             getProductsViewed(request, isbn, out);
-            displayFooter(request, response);
         } 
     }
     
@@ -123,8 +120,6 @@ public class ProductDetails extends HttpServlet {
     }
     
     private void getProductsViewed(HttpServletRequest request, String isbn, PrintWriter out){
-        // TODO: Create Servlet Context Object for most Viewed Products
-        // TODO: Include footer.jsp for the rest of the webpage
         ServletContext context = request.getServletContext();
         String userId = request.getSession().getId();
         Map<String, String> userToProduct = (Map<String, String>)context.getAttribute("mostViewed");
@@ -207,14 +202,7 @@ public class ProductDetails extends HttpServlet {
         }
         return result;
     }
-        
-        
-    private void displayFooter(HttpServletRequest request, HttpServletResponse response){
-        try {
-            RequestDispatcher rd = request.getRequestDispatcher("/footer.jsp");
-            rd.include(request, response);
-        } catch(ServletException | IOException ignore){}
-    }
+
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
