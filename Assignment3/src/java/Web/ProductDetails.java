@@ -44,7 +44,7 @@ public class ProductDetails extends HttpServlet {
             DatabaseHelper.logoutDatabase(c);
             /* TODO: Finish this method, add servlet context 
                on Most Viewed Products and include footer.jsp*/ 
-            getProductsViewed(request.getServletContext(), isbn, out);
+            getProductsViewed(request, isbn, out);
             displayFooter(request, response);
         } 
     }
@@ -122,33 +122,39 @@ public class ProductDetails extends HttpServlet {
         }
     }
     
-    private void getProductsViewed(ServletContext context, String isbn, PrintWriter out){
+    private void getProductsViewed(HttpServletRequest request, String isbn, PrintWriter out){
         // TODO: Create Servlet Context Object for most Viewed Products
         // TODO: Include footer.jsp for the rest of the webpage
-        Map<String, Integer> mostViewed = (Map<String, Integer>)context.getAttribute("mostViewed");
-        if(mostViewed == null){
-            mostViewed = new LinkedHashMap<String, Integer>();
+        ServletContext context = request.getServletContext();
+        String userId = request.getSession().getId();
+        Map<String, String> userToProduct = (Map<String, String>)context.getAttribute("mostViewed");
+        if(userToProduct == null){
+            userToProduct = new LinkedHashMap<String, String>();
         }
         
-        Integer visiters = mostViewed.get(isbn);
-        if(visiters == null){
-            mostViewed.put(isbn, 1);
-        } else {
-            mostViewed.put(isbn, visiters + 1);
-        }
-        context.setAttribute("mostViewed", mostViewed);
-        
-        Connection c = DatabaseHelper.loginDatbase();
-        mostViewed = sortByValue(mostViewed);
-        Iterator it = mostViewed.entrySet().iterator();
+        userToProduct.put(userId, isbn);
+        context.setAttribute("mostViewed", userToProduct);
         
         out.println("<div class=\"recent\">"
                 + "<table class\"col-12\">"
                 + "<h2>Most Currently Viewed Products</h2>"
                 + "<tr>");
         
+        Map<String, Integer> mostViewed = new LinkedHashMap<>();
+        for (Map.Entry<String, String> entry : userToProduct.entrySet()){
+            Integer visits = mostViewed.get(entry.getValue());
+            if(visits == null){
+                mostViewed.put(entry.getValue(), 1);
+            } else {
+                mostViewed.put(entry.getValue(), visits + 1);
+            }
+        }        
+        
+        Connection c = DatabaseHelper.loginDatbase();
+        
         int count = 0;
         int size = Math.min(5, mostViewed.size());
+        Iterator it = mostViewed.entrySet().iterator();
         while(it.hasNext() && count < size){
             Map.Entry pair = (Map.Entry)it.next();
             String stmt = "SELECT * FROM book, author WHERE "

@@ -4,49 +4,40 @@
         <servlet-name>CustomerSeenProducts</servlet-name>
         <servlet-class>Web.CustomerSeenProducts</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>DatabaseHelper</servlet-name>
         <servlet-class>Web.DatabaseHelper</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>ProductDetails</servlet-name>
         <servlet-class>Web.ProductDetails</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>Products</servlet-name>
         <servlet-class>Web.Products</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>CustomerSeenProducts</servlet-name>
         <url-pattern>/CustomerSeenProducts</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>DatabaseHelper</servlet-name>
         <url-pattern>/DatabaseHelper</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ProductDetails</servlet-name>
         <url-pattern>/ProductDetails</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>Products</servlet-name>
         <url-pattern>/Products</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
-    <welcome-file-list>  
-        <welcome-file>Products</welcome-file>   
-    </welcome-file-list> 
+    <welcome-file-list>
+        <welcome-file>Products</welcome-file>
+    </welcome-file-list>
 </web-app>
