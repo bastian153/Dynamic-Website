@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,8 +12,14 @@
             <h1>Noble &amp Barnes</h1>
             <nav>
                 <ul>
-                    <a href="Products"><li class="col-6">Products</li></a>
-                    <a href=""><li class="col-6">About</li></a>
+                    <a href="Products"><li class="col-4">Products</li></a>
+                    <a href=""><li class="col-4">About</li></a>
+                    <a href="Checkout"><li class="col-4">Checkout ( <span id="itemsInCart"><% 
+                       Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+                       if(cart == null)
+                        out.println(0);
+                       else
+                        out.println(cart.size());%></span>) </li></a>
                 </ul>
             </nav>
 	</header>

@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 
 public class Products extends HttpServlet {
@@ -19,19 +21,24 @@ public class Products extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            displayHeader(out);
+            displayHeader(request, out);
             displayProducts(out);
             displayRecentlyViewed(request, response);
         }
     }
     
     
-    private void displayHeader(PrintWriter out){
+    private void displayHeader(HttpServletRequest request, PrintWriter out){
+        HttpSession session = request.getSession();
+        Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+        int cartSize = cart == null ? 0 : cart.size();
         out.println("<!DOCTYPE html><html><title>Noble &amp Barnes</title>");
         out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylesheet.css\">");
         out.println("</head><body><header><h1>Noble &amp Barnes</h1><nav><ul>");
         out.println("<a href=\"\"><li class=\"col-6\">Products</li></a>");
         out.println("<a href=\"./about.jsp\"><li class=\"col-6\">About</li></a>");
+        out.println("<a href=\"Checkout\"><li class=\"col-4\">Checkout ( <span id=\"itemsInCart\">"
+                + cartSize + "</span> )</li></a>");
         out.println("</ul></nav></header>");
     }
     

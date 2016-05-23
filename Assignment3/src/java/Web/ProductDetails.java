@@ -40,9 +40,8 @@ public class ProductDetails extends HttpServlet {
             addProductViewed(request, isbn);  
             displayHeader(request, out);
             Connection c = DatabaseHelper.loginDatbase();
-            queryProduct(c, out, isbn);
+            queryProduct(request, c, out, isbn);
             DatabaseHelper.logoutDatabase(c);
-            /* TODO: Lower view count when user leaves the page */
             getProductsViewed(request, isbn, out);
             displayFooter(request, response);
         } 
@@ -50,17 +49,24 @@ public class ProductDetails extends HttpServlet {
     
     
     private void displayHeader(HttpServletRequest request, PrintWriter out){
+        HttpSession session = request.getSession();
+        Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+        int cartSize = cart == null ? 0 : cart.size();
         out.println("<!DOCTYPE html>"
                 + "<html>"
                 + "<head>"
                 + "<title>Noble &amp Barnes:Product Details</title>"
-                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylesheet.css\""
+                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylesheet.css\">"
+                + "<script src=\"js/jquery-1.12.4.min.js\" type=\"text/javascript\"></script>"
+                + "<script src=\"js/customerInteraction.js\" type=\"text/javascript\"></script>"
                 + "</head>"
                 + "<body>"
                 + "<header><h1>Noble &amp Barnes</h1>"
                 + "<nav><ul>"
                 + "<a href=\"Products\"><li class=\"col-6\">Products</li></a>"
                 + "<a href=\"./about.jsp\"><li class=\"col-6\">About</li></a>"
+                + "<a href=\"Checkout\"><li class=\"col-4\">Checkout ( <span id=\"itemsInCart\">"
+                + cartSize + "</span> )</li></a>"
                 + "</ul></nav></header>");
     }
     
@@ -82,7 +88,8 @@ public class ProductDetails extends HttpServlet {
     }                    
                          
     
-    private void queryProduct(Connection c, PrintWriter out, String isbn){
+    private void queryProduct(HttpServletRequest request, Connection c, 
+                                PrintWriter out, String isbn){
         String stmt = "SELECT * FROM book, author WHERE "
                 + isbn + " = isbn13 AND authorID = id";
         try {
@@ -106,9 +113,20 @@ public class ProductDetails extends HttpServlet {
             
             // Product Description
             out.println("<div class=\"col-6 summary\"><h1>Description</h1>");
-            out.println(r.getString("summary"));
-            // TODO: Add a FORM button to update THE CART
-            out.println("</div></div>");
+            out.println("<p>" + r.getString("summary") + "</p>");
+            
+            
+            // Check to see if item is already in cart
+            HttpSession session = request.getSession();
+            Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+            out.println("<div id=\"divAddToCart\">");
+            if(cart != null && cart.containsKey(r.getString("isbn13"))){
+                out.println("<h5>Item already in cart</h5>");
+            } else {
+                out.println("<input type=\"submit\" onclick=\"addingToCart(" + 
+                        r.getString("isbn13") + ")\" value=\"Add To Cart\" id=\"buttonAddToCart\">");
+            }
+            out.println("</div></div></div>");
             
             
             // Author Description
@@ -133,8 +151,8 @@ public class ProductDetails extends HttpServlet {
         context.setAttribute("mostViewed", userToProduct);
         
         out.println("<div class=\"recent\">"
-                + "<table class\"col-12\">"
                 + "<h2>Most Currently Viewed Products</h2>"
+                + "<table class=\"col-12\">"
                 + "<tr>");
         
         Map<String, Integer> mostViewed = new LinkedHashMap<>();
@@ -172,7 +190,6 @@ public class ProductDetails extends HttpServlet {
                         + result.getString("isbn13").substring(0, 3) + "-"
                         + result.getString("isbn13").substring(3) + "</p>");
                 out.println("<p>Price: $" + result.getString("price") + "</p>");
-                out.println("<p>Currently Viewing: " + pair.getValue() + "</p>");
                 out.println("</a></td>");
             } catch(SQLException ignore){}
             count += 1;
