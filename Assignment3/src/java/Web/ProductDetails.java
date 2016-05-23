@@ -190,6 +190,7 @@ public class ProductDetails extends HttpServlet {
                         + result.getString("isbn13").substring(0, 3) + "-"
                         + result.getString("isbn13").substring(3) + "</p>");
                 out.println("<p>Price: $" + result.getString("price") + "</p>");
+                out.println("Currently Viewing: " + mostViewed.get(result.getString("isbn13")));
                 out.println("</a></td>");
             } catch(SQLException ignore){}
             count += 1;
