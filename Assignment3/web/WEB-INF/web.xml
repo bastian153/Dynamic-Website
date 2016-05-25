@@ -24,6 +24,10 @@
         <servlet-name>AddToCart</servlet-name>
         <servlet-class>Web.AddToCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Checkout</servlet-name>
+        <servlet-class>Web.Checkout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerSeenProducts</servlet-name>
         <url-pattern>/CustomerSeenProducts</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>AddToCart</servlet-name>
         <url-pattern>/AddToCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Checkout</servlet-name>
+        <url-pattern>/Checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

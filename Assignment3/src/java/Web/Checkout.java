@@ -1,16 +1,16 @@
 package Web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AddToCart extends HttpServlet {
+
+public class Checkout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,17 +27,13 @@ public class AddToCart extends HttpServlet {
         HttpSession session = request.getSession();
         Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
         
-        if(cart == null){
-            cart = new LinkedHashMap<>();
-        }
-        
-        if(!cart.containsKey(request.getParameter("product"))){
-            cart.put(request.getParameter("product"), 1);
-            session.setAttribute("cart", cart);
-        }
-        
-        try (PrintWriter out = response.getWriter()) {
-            out.println(cart.size());
+        RequestDispatcher rd = null;
+        if(cart == null || cart.isEmpty()){
+            rd = request.getRequestDispatcher("/emptyCart.jsp");
+            rd.include(request, response);
+        } else {
+            rd = request.getRequestDispatcher("/checkout.jsp");
+            rd.include(request, response);
         }
     }
 

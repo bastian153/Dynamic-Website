@@ -63,8 +63,8 @@ public class ProductDetails extends HttpServlet {
                 + "<body>"
                 + "<header><h1>Noble &amp Barnes</h1>"
                 + "<nav><ul>"
-                + "<a href=\"Products\"><li class=\"col-6\">Products</li></a>"
-                + "<a href=\"./about.jsp\"><li class=\"col-6\">About</li></a>"
+                + "<a href=\"Products\"><li class=\"col-4\">Products</li></a>"
+                + "<a href=\"./about.jsp\"><li class=\"col-4\">About</li></a>"
                 + "<a href=\"Checkout\"><li class=\"col-4\">Checkout ( <span id=\"itemsInCart\">"
                 + cartSize + "</span> )</li></a>"
                 + "</ul></nav></header>");

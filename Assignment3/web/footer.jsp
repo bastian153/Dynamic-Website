@@ -1,10 +1,5 @@
-<%-- 
-    Document   : footer
-    Created on : May 21, 2016, 6:46:04 PM
-    Author     : Adrian
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <footer>

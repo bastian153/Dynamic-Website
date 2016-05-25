@@ -342,6 +342,10 @@ form div i{
     visibility: hidden;
 }
 
+#checkoutProducts * {
+    font-family: sans-serif;
+    margin: 10px;
+}
 
 .recent * {
     font-family: sans-serif;

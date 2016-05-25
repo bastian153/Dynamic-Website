@@ -35,8 +35,8 @@ public class Products extends HttpServlet {
         out.println("<!DOCTYPE html><html><title>Noble &amp Barnes</title>");
         out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylesheet.css\">");
         out.println("</head><body><header><h1>Noble &amp Barnes</h1><nav><ul>");
-        out.println("<a href=\"\"><li class=\"col-6\">Products</li></a>");
-        out.println("<a href=\"./about.jsp\"><li class=\"col-6\">About</li></a>");
+        out.println("<a href=\"\"><li class=\"col-4\">Products</li></a>");
+        out.println("<a href=\"./about.jsp\"><li class=\"col-4\">About</li></a>");
         out.println("<a href=\"Checkout\"><li class=\"col-4\">Checkout ( <span id=\"itemsInCart\">"
                 + cartSize + "</span> )</li></a>");
         out.println("</ul></nav></header>");
