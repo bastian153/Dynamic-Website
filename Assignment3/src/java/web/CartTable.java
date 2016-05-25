@@ -76,7 +76,8 @@ public class CartTable extends HttpServlet {
     
     
     private void displayPrice(PrintWriter out, ResultSet rs) throws SQLException{
-        
+        out.println("<td class=\"col-2\"><p>" + rs.getString("price")
+                    + "</p></td>");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

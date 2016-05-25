@@ -3,6 +3,7 @@ package Web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,14 +26,17 @@ public class AddToCart extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+        LinkedList<ShoppingCart> cart = (LinkedList<ShoppingCart>)session.getAttribute("cart");
         
         if(cart == null){
-            cart = new LinkedHashMap<>();
+            cart = new LinkedList<>();
         }
         
-        if(!cart.containsKey(request.getParameter("product"))){
-            cart.put(request.getParameter("product"), 1);
+        String isbn = request.getParameter("product");
+        String src = request.getParameter("image");
+        int price = Integer.parseInt(request.getParameter("price"));
+        if(!cart.contains(new ShoppingCart(isbn, src, price))){
+            cart.add(new ShoppingCart(isbn, src, price));
             session.setAttribute("cart", cart);
         }
         

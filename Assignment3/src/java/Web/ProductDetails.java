@@ -124,7 +124,10 @@ public class ProductDetails extends HttpServlet {
                 out.println("<h5>Item already in cart</h5>");
             } else {
                 out.println("<input type=\"submit\" onclick=\"addingToCart(" + 
-                        r.getString("isbn13") + ")\" value=\"Add To Cart\" id=\"buttonAddToCart\">");
+                        r.getString("isbn13") + ", " + r.getString("price")
+                        + ", '" 
+                        + r.getString("cover") 
+                        + "')\" value=\"Add To Cart\" id=\"buttonAddToCart\">");
             }
             out.println("</div></div></div>");
             

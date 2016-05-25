@@ -1,9 +1,10 @@
-<%@page import="java.util.Map"%>
+<%@page import="Web.ShoppingCart"%>
+<%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <% 
-   Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+   LinkedList<ShoppingCart> cart = (LinkedList<ShoppingCart>)session.getAttribute("cart");
    int size = cart.size();
 %>
 <html>

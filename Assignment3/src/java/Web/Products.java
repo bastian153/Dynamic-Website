@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
+import java.util.LinkedList;
 import javax.servlet.http.HttpSession;
 
 
@@ -30,7 +30,7 @@ public class Products extends HttpServlet {
     
     private void displayHeader(HttpServletRequest request, PrintWriter out){
         HttpSession session = request.getSession();
-        Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+        LinkedList<ShoppingCart> cart = (LinkedList<ShoppingCart>)session.getAttribute("cart");
         int cartSize = cart == null ? 0 : cart.size();
         out.println("<!DOCTYPE html><html><title>Noble &amp Barnes</title>");
         out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylesheet.css\">");
@@ -66,7 +66,7 @@ public class Products extends HttpServlet {
         try {
             RequestDispatcher rd = request.getRequestDispatcher("CustomerSeenProducts");
             rd.include(request, response);
-        } catch(ServletException | IOException e){
+        } catch(ServletException | IOException ignore){
         }
     }
 
@@ -89,8 +89,7 @@ public class Products extends HttpServlet {
                     out.println("</tr><tr>");
                 }
             }
-        } catch(SQLException ignore){
-        }
+        } catch(SQLException ignore){}
     }
     
     
@@ -99,7 +98,7 @@ public class Products extends HttpServlet {
             out.println("<td class=\"col-4\">");
             out.println("<a href=ProductDetails?isbn=" 
                     + result.getString("isbn13") + ">");
-            out.println("<img src="+ result.getString("cover") + " alt=\""
+            out.println("<img src=\"" + result.getString("cover") + "\" alt=\""
                     + result.getString("bookName") + "\">");
             out.println("<p>" + result.getString("bookName") + "</p>");
             out.println("<p>Author: " + result.getString("name") + "</p>");
@@ -110,9 +109,7 @@ public class Products extends HttpServlet {
             out.println("<p>Price: $" + result.getString("price") + "</p>");
             out.println("</a></td>");
             
-        } catch (SQLException ignore){
-            out.println("<h1>ERROR OCCURED!</h1>");
-        }
+        } catch (SQLException ignore){}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

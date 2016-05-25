@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
@@ -28,7 +27,7 @@ public class CustomerSeenProducts extends HttpServlet {
                 out.println("<h2>Recently Viewed Products</h2>");
                 displayRecentProducts(recentlyViewed, out);
                 out.println("</div>");
-            } catch(Exception ignore){}
+            }
         }
     }
     
