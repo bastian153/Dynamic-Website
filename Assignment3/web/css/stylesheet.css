@@ -228,6 +228,14 @@ footer * {
     margin: 30px;
 }
 
+.content p {
+    font-family: sans-serif;
+}
+
+.content span {
+    font-family: sans-serif;
+}
+
 .input-info{
     width: 100%;
     /*max-width: 400px;*/
@@ -342,9 +350,17 @@ form div i{
     visibility: hidden;
 }
 
-#checkoutProducts * {
-    font-family: sans-serif;
+.checkoutTable{
     margin: 10px;
+}
+
+.checkoutTable * {
+    height: auto;
+    font-family: sans-serif;
+}
+
+.checkoutTable img {
+    height: 50px;
 }
 
 .recent * {

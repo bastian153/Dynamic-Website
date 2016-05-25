@@ -165,9 +165,24 @@
                 <h1>Cart</h1>
             </div>
         </div>
-        <div id="checkoutProducts">
-            <p>Tax: <span id="tax">0%</span></p>
-            <p>Total Price: <span id="total_price">$0</span></p>
+        <div class="col-12">
+            <table class="col-12 checkoutTable">
+                <tr class="col-12">
+                    <td class="col-2">Cover</td>
+                    <td class="col-2">Name</td>
+                    <td class="col-2">Price</td>
+                    <td class="col-2">Quantity</td>
+                    <td class="col-2">Update</td>
+                    <td class="col-2">Remove</td>
+                </tr>
+            </table>
+            <table clas="col-12" id="checkoutCart">
+                
+            </table>
+            <div class="content">
+                <p>Tax: <span id="tax">0%</span></p>
+                <p>Total Price: <span id="total_price">$0</span></p>
+            </div>
         </div>
         
         <footer>

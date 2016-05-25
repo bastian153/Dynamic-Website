@@ -11,18 +11,37 @@ function createState() {
 }
 
 function createMonth() {
-	var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-	select = document.getElementById("month");
+    var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    var select = document.getElementById("month");
 
-	for(var i = 0; i < month.length; i++){
-		var opt = document.createElement('option');
-		opt.value = i+1;
-		opt.innerHTML = month[i];
-		select.appendChild(opt);
-	}
+    for(var i = 0; i < month.length; i++){
+        var opt = document.createElement('option');
+        opt.value = i+1;
+        opt.innerHTML = month[i];
+        select.appendChild(opt);
+    }
 }
 
+function createCartTable(){
+    $.ajax({
+        type: "GET",
+        url: "CartTable",
+        datatype: "text/plain",
+        
+        success: function(data){
+            var e = document.getElementById("checkoutCart");
+            e.innerHTML = data;
+            console.log(data);
+        },
+        error: function(){
+            console.log("Servlet Error");
+        }
+    });
+}
+
+
 function main(){
-	createState();
-	createMonth();
+    createState();
+    createMonth();
+    createCartTable();
 }
