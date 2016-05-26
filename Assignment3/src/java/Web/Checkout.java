@@ -1,7 +1,6 @@
 package Web;
 
 import java.io.IOException;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,15 +24,15 @@ public class Checkout extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+        Cart cart = (Cart)session.getAttribute("cart");
         
         RequestDispatcher rd = null;
         if(cart == null || cart.isEmpty()){
             rd = request.getRequestDispatcher("/emptyCart.jsp");
-            rd.include(request, response);
+            rd.forward(request, response);
         } else {
             rd = request.getRequestDispatcher("/checkout.jsp");
-            rd.include(request, response);
+            rd.forward(request, response);
         }
     }
 

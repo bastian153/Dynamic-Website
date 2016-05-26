@@ -2,9 +2,6 @@ package Web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,24 +22,26 @@ public class AddToCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
         HttpSession session = request.getSession();
-        LinkedList<ShoppingCart> cart = (LinkedList<ShoppingCart>)session.getAttribute("cart");
+        Cart cart = (Cart)session.getAttribute("cart");
         
         if(cart == null){
-            cart = new LinkedList<>();
+            cart = new Cart();
         }
-        
+                
         String isbn = request.getParameter("product");
-        String src = request.getParameter("image");
-        int price = Integer.parseInt(request.getParameter("price"));
-        if(!cart.contains(new ShoppingCart(isbn, src, price))){
-            cart.add(new ShoppingCart(isbn, src, price));
+        String src = request.getParameter("src");
+        String name = request.getParameter("name");
+        double price = Double.parseDouble(request.getParameter("cost"));
+        
+        if(!cart.contains(isbn)){
+            cart.add(isbn, name, src, price);
             session.setAttribute("cart", cart);
         }
         
-        try (PrintWriter out = response.getWriter()) {
-            out.println(cart.size());
-        }
+        out.println(cart.size());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

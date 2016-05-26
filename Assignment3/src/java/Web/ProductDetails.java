@@ -50,7 +50,7 @@ public class ProductDetails extends HttpServlet {
     
     private void displayHeader(HttpServletRequest request, PrintWriter out){
         HttpSession session = request.getSession();
-        Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+        Cart cart = (Cart)session.getAttribute("cart");
         int cartSize = cart == null ? 0 : cart.size();
         out.println("<!DOCTYPE html>"
                 + "<html>"
@@ -118,15 +118,15 @@ public class ProductDetails extends HttpServlet {
             
             // Check to see if item is already in cart
             HttpSession session = request.getSession();
-            Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+            Cart cart = (Cart)session.getAttribute("cart");
             out.println("<div id=\"divAddToCart\">");
-            if(cart != null && cart.containsKey(r.getString("isbn13"))){
+            if(cart != null && cart.contains(r.getString("isbn13"))){
                 out.println("<h5>Item already in cart</h5>");
             } else {
                 out.println("<input type=\"submit\" onclick=\"addingToCart(" + 
                         r.getString("isbn13") + ", " + r.getString("price")
-                        + ", '" 
-                        + r.getString("cover") 
+                        + ", '" + r.getString("cover") + "', '" 
+                        + r.getString("bookName")
                         + "')\" value=\"Add To Cart\" id=\"buttonAddToCart\">");
             }
             out.println("</div></div></div>");

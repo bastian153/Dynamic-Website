@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 import javax.servlet.http.HttpSession;
 
 
@@ -30,7 +29,7 @@ public class Products extends HttpServlet {
     
     private void displayHeader(HttpServletRequest request, PrintWriter out){
         HttpSession session = request.getSession();
-        LinkedList<ShoppingCart> cart = (LinkedList<ShoppingCart>)session.getAttribute("cart");
+        Cart cart = (Cart)session.getAttribute("cart");
         int cartSize = cart == null ? 0 : cart.size();
         out.println("<!DOCTYPE html><html><title>Noble &amp Barnes</title>");
         out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylesheet.css\">");

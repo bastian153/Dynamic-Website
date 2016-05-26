@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,12 +29,13 @@ public class CartTable extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Map<String, Integer> cart = (Map<String, Integer>)session.getAttribute("cart");
+        Cart cart = (Cart) session.getAttribute("cart");
         Connection connection = DatabaseHelper.loginDatbase();
+        List<Product> products = cart.getProducts();
         
         try (PrintWriter out = response.getWriter()) {
-            for(Map.Entry<String, Integer> pair: cart.entrySet()){
-                writeTableRow(connection, out, pair);
+            for(Product product: products){
+                writeTableRow(connection, out, product);
             }
         }
         
@@ -41,42 +43,30 @@ public class CartTable extends HttpServlet {
     }
     
     
-    private void writeTableRow(Connection c, PrintWriter out, 
-                                   Map.Entry<String, Integer> pair){
-        String stmt = "SELECT *"
-                + "FROM book "
-                + "WHERE isbn13 = " + pair.getKey();
-        try {
-            PreparedStatement pstmt = c.prepareCall(stmt);
-            ResultSet result = pstmt.executeQuery();
-            if(result.next()){
-                out.println("<tr class=\"col-12\">");
-                displayCover(out, result);
-                displayName(out, result);
-                displayPrice(out, result);
-                out.println("</tr>");
-            }
-        } catch(SQLException ignore){
-            out.println("<h1>Error</h1>");
-        }
+    private void writeTableRow(Connection c, PrintWriter out, Product product){
+        out.println("<tr class=\"col-12\">");
+        displayCover(out, product);
+        displayName(out, product);
+        displayPrice(out, product);
+        out.println("</tr>");
     }
     
     
-    private void displayCover(PrintWriter out, ResultSet rs) throws SQLException{
+    private void displayCover(PrintWriter out, Product p){
         out.println("<td class=\"col-2\"><img src=\""
-                + rs.getString("cover") + "\" alt=\"" + rs.getString("bookName")
+                + p.getImgSrc() + "\" alt=\"" + p.getName()
                 + "\">");
     }
     
     
-    private void displayName(PrintWriter out, ResultSet rs) throws SQLException{
-        out.println("<td class=\"col-2>\"><p>" + rs.getString("bookName")
+    private void displayName(PrintWriter out, Product p){
+        out.println("<td class=\"col-2>\"><p>" + p.getName()
                     + "</p></td>");
     }
     
     
-    private void displayPrice(PrintWriter out, ResultSet rs) throws SQLException{
-        out.println("<td class=\"col-2\"><p>" + rs.getString("price")
+    private void displayPrice(PrintWriter out, Product p){
+        out.println("<td class=\"col-2\"><p>" + p.getPrice()
                     + "</p></td>");
     }
 

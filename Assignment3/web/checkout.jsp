@@ -1,10 +1,9 @@
-<%@page import="Web.ShoppingCart"%>
-<%@page import="java.util.LinkedList"%>
+<%@page import="Web.Cart"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <% 
-   LinkedList<ShoppingCart> cart = (LinkedList<ShoppingCart>)session.getAttribute("cart");
+   Cart cart = (Cart)session.getAttribute("cart");
    int size = cart.size();
 %>
 <html>
