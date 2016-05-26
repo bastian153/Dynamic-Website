@@ -32,6 +32,10 @@
         <servlet-name>CartTable</servlet-name>
         <servlet-class>Web.CartTable</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuantityUpdater</servlet-name>
+        <servlet-class>Web.QuantityUpdater</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerSeenProducts</servlet-name>
         <url-pattern>/CustomerSeenProducts</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>CartTable</servlet-name>
         <url-pattern>/CartTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuantityUpdater</servlet-name>
+        <url-pattern>/QuantityUpdater</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

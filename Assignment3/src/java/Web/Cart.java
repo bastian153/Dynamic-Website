@@ -28,7 +28,7 @@ public class Cart {
 
     public void remove(String isbn){
         Iterator<Product> iter = products.iterator();
-        for( ; iter.hasNext(); ){
+        while(iter.hasNext()){
             Product product = iter.next();
             if(product.getIsbn().equals(isbn)){
                 iter.remove();
@@ -58,4 +58,15 @@ public class Cart {
     public boolean isEmpty(){
         return this.size == 0;
     }
+    
+    
+    public Product getProduct(String isbn){
+        Iterator<Product> it = products.iterator();
+        while(it.hasNext()){
+            Product p = it.next();
+            if(p.getIsbn().equals(isbn))
+                return p;
+        }
+        return null;
+    }   
 }

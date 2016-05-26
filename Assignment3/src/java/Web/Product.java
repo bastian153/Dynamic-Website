@@ -6,8 +6,6 @@ public class Product {
     private String name;
     private String imgSrc;
     private double price; // Base price without quantity
-    private double cost; // Total price with quantity
-    private int quantity;
 
 
 
@@ -16,8 +14,6 @@ public class Product {
         this.name = name;
         this.imgSrc = imgSrc;
         this.price = price;
-        this.cost = price;
-        this.quantity = 1;
     }
 
 
@@ -37,25 +33,7 @@ public class Product {
         return this.price;
     }
 
-    public int getQuantity(){
-        return this.quantity;
-    }
-
-    public double getCost(){
-        return this.cost;
-    }
-
-    public void setQuantity(int n){
-        this.quantity = n;
-        setCost();
-    }
-
     public void setPrice(int n){
         this.price = n;
-        setCost();
-    }
-
-    private void setCost(){
-        this.cost = price * quantity;
     }
 }

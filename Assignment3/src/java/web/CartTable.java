@@ -32,22 +32,29 @@ public class CartTable extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
         Connection connection = DatabaseHelper.loginDatbase();
         List<Product> products = cart.getProducts();
+        double sum = 0;
         
         try (PrintWriter out = response.getWriter()) {
             for(Product product: products){
-                writeTableRow(connection, out, product);
+                sum = sum + product.getPrice();
+                writeTableRow(connection, out, product, products.indexOf(product));
             }
+            out.println(";" + sum);
         }
         
         DatabaseHelper.logoutDatabase(connection);
     }
     
     
-    private void writeTableRow(Connection c, PrintWriter out, Product product){
-        out.println("<tr class=\"col-12\">");
+    private void writeTableRow(Connection c, PrintWriter out, 
+                               Product product, int index){
+        out.println("<tr class=\"col-12\" id=\"Row-" + index + "\">");
         displayCover(out, product);
         displayName(out, product);
-        displayPrice(out, product);
+        displayPrice(out, product, index);
+        displayQuantity(out, product, index);
+        displayUpdate(out, product, index);
+        //displayRemove(out, product, index);
         out.println("</tr>");
     }
     
@@ -65,11 +72,37 @@ public class CartTable extends HttpServlet {
     }
     
     
-    private void displayPrice(PrintWriter out, Product p){
-        out.println("<td class=\"col-2\"><p>" + p.getPrice()
+    private void displayPrice(PrintWriter out, Product p, int index){
+        out.println("<td class=\"col-2\"><p id=\"Price-" + index
+                    + "\">" + p.getPrice()
                     + "</p></td>");
     }
+    
+    
+    private void displayQuantity(PrintWriter out, Product p, int index) {
+        out.println("<td class=\"col-2\"><p id=\"Quantity-" + index
+                    + "\">1</p></td>");
+    }
+    
+    private void displayUpdate(PrintWriter out, Product p, int index){
+        out.println("<td class=\"col-2\">"
+                + "<p>Quantity</p>"
+                + "<input type=\"number\" min=\"1\" id=\"Update-" + index
+                + "\" value=\"1\"/>"
+                + "<input type=\"submit\" value=\"Update\" onclick=\"updateQuantity("
+                + "'Price-" + index + "', 'Quantity-" + index + "', 'Update-"
+                + index + "', '" + p.getIsbn() + "')\">");
+    }
+    
+    
+    private void displayRemove(PrintWriter out, Product p, int index){
+        out.println("<td class=\"col-2\">"
+                + "<input type=\"submit\" value=\"Remove\">"
+                + "</td>");
+    }
 
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

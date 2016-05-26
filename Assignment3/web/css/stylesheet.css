@@ -360,9 +360,14 @@ form div i{
 }
 
 .checkoutTable img {
-    height: 50px;
+    height: 20px;
 }
 
 .recent * {
     font-family: sans-serif;
+}
+
+#checkoutCart tr {
+    height: auto;
+    text-align: center;
 }

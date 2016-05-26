@@ -29,8 +29,12 @@ function createCartTable(){
         datatype: "text/plain",
         
         success: function(data){
-            var e = document.getElementById("checkoutCart");
-            e.innerHTML = data;
+            var checkout = document.getElementById("checkoutCart");
+            var totalPrice = document.getElementById("total_price");
+            var result = data.split(";");
+            
+            checkout.innerHTML = result[0];
+            totalPrice.innerHTML = result[1];
             console.log(data);
         },
         error: function(){
