@@ -36,6 +36,22 @@
         <servlet-name>QuantityUpdater</servlet-name>
         <servlet-class>Web.QuantityUpdater</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddOrderToDB</servlet-name>
+        <servlet-class>Web.AddOrderToDB</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompleteCart</servlet-name>
+        <servlet-class>Web.CompleteCart</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddOrderToDB</servlet-name>
+        <url-pattern>/AddOrderToDB</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompleteCart</servlet-name>
+        <url-pattern>/CompleteCart</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CustomerSeenProducts</servlet-name>
         <url-pattern>/CustomerSeenProducts</url-pattern>

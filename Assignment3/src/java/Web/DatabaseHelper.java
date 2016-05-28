@@ -10,7 +10,7 @@ public class DatabaseHelper {
     public static final String URL = "jdbc:mysql://localhost/inf124grp08";
     
     /*
-    ICS Group Account
+    //ICS Group Account
     public static final String USERNAME = "inf124grp08";
     public static final String PASSWORD = "@e8hUjaB";
     public static final String URL = "jdbc:mysql://sylvester-mccoy-v3.ics.uci.edu/inf124grp08";

@@ -1,5 +1,5 @@
 // Section 1
-function checkBillingInformation(){    
+function checkBillingInformation(){
     var firstN = document.forms["Billing-Info"]["firstName"].value;
     var lastN = document.forms["Billing-Info"]["lastName"].value;
     var addr = document.forms["Billing-Info"]["address"].value;
@@ -93,11 +93,11 @@ function checkCreditCard(){
     var csv = new RegExp("^([0-9]{3})$");
     cardNumber.test(creditcard);
     csv.test(csv_num);
-    
+
     // Check Month and year
     var month = document.getElementById("month").options;
     var year = document.getElementById("year").options;
-    
+
     var check = 0;
     if(creditcard === null || creditcard === ""){
         document.forms["Creditcard-Info"]["card"].style.borderColor="#FD8182";
@@ -108,7 +108,7 @@ function checkCreditCard(){
         document.getElementById("credit-card-error").style.visibility = "hidden";
     }
 
-    
+
     if(csv_num === null || csv_num === ""){
         document.forms["Creditcard-Info"]["csv"].style.borderColor="#FD8182";
         document.getElementById("csv-error").style.visibility = "visible";
@@ -148,21 +148,70 @@ function checkValidation(){
     var postalCode = document.forms["Billing-Info"]["areaCode"].value;
 
 
-
     if((check1 + check2) !== 0){
         document.getElementById("submit-error").style.visibility = "visible";
     }
+
     else{
-        document.getElementById("submit-error").style.visibility = "hidden";
-        var email = 'sample@gmail.com';
-        var subject = 'Order Submission';
-        var emailBody = 'Shipping Information:' + "%0A" 
-                       +'First Name: ' + firstN + "%0A"
-                       +'Last Name: ' + lastN + "%0A"
-                       +'Address: ' + addr + "%0A"
-                       +'City: ' + city + "%0A"
-                       +'State: ' + state + "%0A"
-                       +'Zip Code: ' + postalCode + "%0A%0A";
-        window.location = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody;
+
+      $.ajax({
+          type: "POST",
+          url: "AddOrderToDB",
+          datatype: "text/plain",
+          data: {"firstN" : firstN, "lastN" : lastN, "addr" : addr, "city" : city, "state" : state,
+                 "postalCode" : postalCode},
+
+          success: function(data){
+
+          }
+      });
+
+
+      //var imagePath = "";
+      var isbn = "";
+      var quantity = "";
+
+      var table = document.getElementById('checkoutCart');
+
+      var rowLength = table.rows.length;
+
+      for(var i=0; i<rowLength; i+=1){
+        var row = table.rows[i];
+        var cellLength = row.cells.length;
+
+        for(var y=0; y<cellLength; y+=1){
+          var cell = row.cells[y];
+          var child = cell.childNodes[0];
+          // if (child.tagName == "IMG"){
+          //   console.log(child.src);
+          //   imagePath = child.src;
+          // }else
+          if (child.tagName == "P" && y == 3){
+            console.log(child.innerHTML);
+            quantity = child.innerHTML;
+          }else if (y == 4){
+            var onClickText = cell.childNodes[2].getAttribute('onclick').split("\'");
+            console.log(onClickText[7]);
+            isbn = onClickText[7];
+          }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "CompleteCart",
+            datatype: "text/plain",
+            data: {"isbn" : isbn, "quantity" : quantity},
+
+            success: function(data){
+
+            }
+        });
+      }
     }
 }
+
+    function DBSave(firstN, lastN, addr, city, state, postalCode,email){
+
+      var query = "Insert orders (first_name, lastname, address, state, city, zip_code, quantity, card_id)"+
+                  "Values("+firstN+","+ lastN+", "+addr+", "+ city+", "+state+", "+postalCode+", "+email+" );"
+    }//saving the cart Information to DB
