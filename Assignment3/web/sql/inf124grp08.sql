@@ -73,6 +73,34 @@ INSERT INTO `book` VALUES ('9780061988356','0061988359','Lost in Shangri-La','Hi
 UNLOCK TABLES;
 
 --
+-- Table structure for table `cart`
+--
+
+DROP TABLE IF EXISTS `cart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cart` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `cart_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `isbn13` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `cart_id` (`cart_id`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `orders` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cart`
+--
+
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (32,46,1,'9780374500016'),(33,46,1,'9781451673319'),(34,47,3,'9780385420174'),(35,47,3,'9780544336261'),(36,47,2,'9781501143519'),(37,48,2,'9780374500016'),(38,48,1,'9780061988356'),(39,48,3,'9780446310789'),(40,48,2,'9788499890944'),(41,48,1,'9780140177398');
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `orders`
 --
 
@@ -88,7 +116,7 @@ CREATE TABLE `orders` (
   `city` varchar(25) NOT NULL,
   `zp_code` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +125,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (46,'Adrian','Padilla','3143 Josephine St.','CA','Lynwood',90262),(47,'Luis','Lopez','333 Las Palmas Dr','CA','Irvine',92617),(48,'Ryan','William','3130 Louise St.','CA','Lynwood',90262);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,4 +186,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-26  2:24:47
+-- Dump completed on 2016-05-29  2:32:48
