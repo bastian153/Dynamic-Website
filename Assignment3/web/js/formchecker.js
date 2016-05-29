@@ -201,6 +201,8 @@ function checkValidation(){
                 }
             });
         }
+        
+        window.location = "confirmation.jsp?orderId=" + orderId;
     }
 }
 

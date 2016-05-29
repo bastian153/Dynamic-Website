@@ -371,3 +371,21 @@ form div i{
     height: auto;
     text-align: center;
 }
+
+.details {
+    margin: 30px;
+}
+
+
+.details * {
+    font-family: sans-serif;
+    margin: 10px;
+}
+
+.details h2 {
+    text-align: center;
+}
+
+.details table tr {
+    height: 50px;
+}
