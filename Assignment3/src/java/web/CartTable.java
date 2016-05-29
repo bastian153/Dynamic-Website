@@ -3,11 +3,7 @@ package Web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -93,15 +89,7 @@ public class CartTable extends HttpServlet {
                 + "'Price-" + index + "', 'Quantity-" + index + "', 'Update-"
                 + index + "', '" + p.getIsbn() + "')\">");
     }
-    
-    
-    private void displayRemove(PrintWriter out, Product p, int index){
-        out.println("<td class=\"col-2\">"
-                + "<input type=\"submit\" value=\"Remove\">"
-                + "</td>");
-    }
-
-    
+        
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

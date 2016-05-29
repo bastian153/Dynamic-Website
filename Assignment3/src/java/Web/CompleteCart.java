@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class CompleteCart extends HttpServlet {
 
@@ -23,37 +22,29 @@ public class CompleteCart extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.setContentType("text/html;charset=UTF-8");
-            
-            String isbn = request.getParameter("isbn");
-            String quantity = request.getParameter("quantity");
-            int orderId = Integer.parseInt(request.getParameter("orderId"));
+        response.setContentType("text/html;charset=UTF-8");
 
-            try{
-                Connection connection = DatabaseHelper.loginDatbase();
-                String query = "INSERT INTO cart (cart_id, isbn13, quantity) VALUES (?, ?, ?)";
+        String isbn = request.getParameter("isbn");
+        String quantity = request.getParameter("quantity");
+        int orderId = Integer.parseInt(request.getParameter("orderId"));
 
-                PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, orderId);
-                ps.setString(2, isbn);
-                ps.setInt(3, Integer.parseInt(quantity));
+        try{
+            Connection connection = DatabaseHelper.loginDatbase();
+            String query = "INSERT INTO cart (cart_id, isbn13, quantity) VALUES (?, ?, ?)";
 
-                ps.executeUpdate();
-                ps.close();
-                DatabaseHelper.logoutDatabase(connection);
-            }catch (SQLException se){}
-            
-            emptyCart(request.getSession());
-            
-            // Redirect to Confirmation JSP
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, orderId);
+            ps.setString(2, isbn);
+            ps.setInt(3, Integer.parseInt(quantity));
+
+            ps.executeUpdate();
+            ps.close();
+            DatabaseHelper.logoutDatabase(connection);
+        }catch (SQLException se){}
+
+        // empty the cart
+        request.getSession().setAttribute("cart", null);           
     }
-    
-    private void emptyCart(HttpSession session){
-        Cart cart = (Cart)session.getAttribute("cart");
-        cart = null;
-        session.setAttribute("cart", cart);
-    }
-
 
 
 

@@ -196,6 +196,7 @@ function checkValidation(){
                 type: "POST",
                 url: "CompleteCart",
                 datatype: "text/plain",
+                async: false,
                 data: {"isbn" : isbn, "quantity" : quantity, "orderId" : orderId},
                 success: function(){
                 }

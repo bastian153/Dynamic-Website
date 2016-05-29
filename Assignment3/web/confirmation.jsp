@@ -1,9 +1,14 @@
+<%@page import="Web.Cart"%>
 <%@page import="Web.DatabaseHelper"%>
 <%@page import="java.io.*,java.util.*,java.sql.*" %>
 <%@page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<% Connection c = DatabaseHelper.loginDatbase(); %>
+<% 
+    Connection c = DatabaseHelper.loginDatbase(); 
+    Cart cart = (Cart)session.getAttribute("cart");
+    int size = cart == null ? 0 : cart.size();
+%>
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +25,7 @@
                 <ul>
                     <a href="Products"><li class="col-4">Products</li></a>
                     <a href="about.jsp"><li class="col-4">About</li></a>
-                    <a href="Checkout"><li class="col-4">Checkout ( 0 )</li></a>
+                    <a href="Checkout"><li class="col-4">Checkout ( <%=size%> )</li></a>
                 </ul>
             </nav>
         </header>
