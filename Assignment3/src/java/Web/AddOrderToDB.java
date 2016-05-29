@@ -6,13 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class AddOrderToDB extends HttpServlet {
 
@@ -29,7 +27,6 @@ public class AddOrderToDB extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
               response.setContentType("text/html;charset=UTF-8");
 
               String firstN = request.getParameter("firstN");
@@ -43,16 +40,20 @@ public class AddOrderToDB extends HttpServlet {
 
               String query = "INSERT INTO orders (first_name, last_name, address, state, city, zp_code) VALUES (?, ?, ?, ?, ?, ?)";
 
-              try{
-                PreparedStatement ps = connection.prepareStatement(query);
+              try(PrintWriter out = response.getWriter()){
+                PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, firstN);
                 ps.setString(2, lastN);
                 ps.setString(3, addr);
                 ps.setString(4, state);
                 ps.setString(5, city);
                 ps.setInt(6, Integer.parseInt(postalCode));
-
                 ps.executeUpdate();
+                
+                ResultSet rs = ps.getGeneratedKeys();
+                if(rs.next()){
+                    out.println(rs.getInt(1));
+                }
                 ps.close();
                 connection.close();
               }catch (SQLException se){

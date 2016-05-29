@@ -1,10 +1,7 @@
 package Web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,35 +23,35 @@ public class CompleteCart extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
             response.setContentType("text/html;charset=UTF-8");
-
+            
             String isbn = request.getParameter("isbn");
             String quantity = request.getParameter("quantity");
+            int orderId = Integer.parseInt(request.getParameter("orderId"));
 
             try{
                 Connection connection = DatabaseHelper.loginDatbase();
-                Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT MAX(id) as m_id FROM orders");
-
                 String query = "INSERT INTO cart (cart_id, isbn13, quantity) VALUES (?, ?, ?)";
 
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, rs.getInt("m_id"));
+                ps.setInt(1, orderId);
                 ps.setString(2, isbn);
                 ps.setInt(3, Integer.parseInt(quantity));
 
                 ps.executeUpdate();
-                rs.close();
+                ps.close();
                 DatabaseHelper.logoutDatabase(connection);
-            }catch (SQLException se){
-              //throw se;
-            }
+            }catch (SQLException se){}
             
-            HttpSession session = request.getSession();
-            Cart cart = (Cart)session.getAttribute("cart");
-            cart = null;
-            session.setAttribute("cart", cart);
+            emptyCart(request.getSession());
+            
+            // Redirect to Confirmation JSP
+    }
+    
+    private void emptyCart(HttpSession session){
+        Cart cart = (Cart)session.getAttribute("cart");
+        cart = null;
+        session.setAttribute("cart", cart);
     }
 
 

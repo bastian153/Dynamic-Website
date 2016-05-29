@@ -38,9 +38,3 @@ function updateQuantity(productPriceId, productQuantityId, productUpdateId, isbn
         }
     });
 }
-
-
-
-function updateTotal(){
-    
-}

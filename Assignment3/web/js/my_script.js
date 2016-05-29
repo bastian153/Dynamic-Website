@@ -35,7 +35,6 @@ function createCartTable(){
             
             checkout.innerHTML = result[0];
             totalPrice.innerHTML = result[1];
-            console.log(data);
         },
         error: function(){
             console.log("Servlet Error");
